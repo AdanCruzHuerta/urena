@@ -15,10 +15,11 @@ class Admon extends CI_Controller {
 	public function login(){
 		if($this->input->post()){
 			$email = $this->input->post('email');
-			$password = md5(sha1($this->input->post('password')));
+			$password = $this->input->post('password');
+			//$password = md5(sha1($this->input->post('password')));
 
 			$admin = $this->admin_model->valida($email,$password);
-			
+			//die(var_dump($admin));
 			if(is_object($admin)){
 				$this->session->set_userdata('email',$admin->email);
 				$this->session->set_userdata('nombre',$admin->nombre);

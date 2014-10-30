@@ -11,10 +11,10 @@ class Usuario_model extends CI_Model{
 						->row();
 	}
 
-	public function insert_user($email,$password,$rol){
+	public function insert_user($email,$password){
 		$this->db->set('email',$email)
 				 ->set('password',$password)
-				 ->set('roles_id',$rol)
+				 //->set('roles_id',$rol)
 				 ->insert('usuarios');
 				
 			return $this->db->insert_id();

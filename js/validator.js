@@ -77,7 +77,7 @@
 
 						// realizamos peticion ajax
 						$.ajax({
-							url:'http://urena.sharksoft.com.mx/home/valida_correo',
+							url:'http://localhost/urena/index.php/home/valida_correo',
 							timeout: 5000, //sets timeout to 3 seconds
 							type:'post',
 							data:{
@@ -93,7 +93,7 @@
 								}else{
 									$("#mensaje").hide();
 									$.ajax({
-										url:'http://urena.sharksoft.com.mx/home/insert_cliente',
+										url:'http://localhost/urena/index.php/home/insert_cliente',
 										timeout: 3000, //sets timeout to 3 seconds
 										type:'post',
 										data:{

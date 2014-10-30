@@ -217,7 +217,8 @@ nav{
   position: relative;
 }
 .carrito > button {
-  padding: 6px 12px 6px 0px !important;
+  font-size: 4em;
+  padding: 0px !important;
 }
 .carrito > button > kbd {
   position: relative;
@@ -467,11 +468,55 @@ h2{color:#0b56a8;}
   margin: 0 13px 0 0;
   font-size: 19px;
 }
-
-.head-modal{
-  background: #BEA78D;
+.modal-backdrop.in{
+  opacity:.9 !important;
 }
-
-.body-modal{
-  background: #F8F8F8;
+.modal-header{
+  background-color: #BEA78D !important;
+  -webkit-border-top-left-radius: 6px;
+  -webkit-border-top-right-radius: 6px;
+  -moz-border-radius-topleft: 6px;
+  -moz-border-radius-topright: 6px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+.modal-footer{
+  background-color: #E6DCD0 !important;
+  -webkit-border-bottom-left-radius: 6px;
+  -webkit-border-bottom-right-radius: 6px;
+  -moz-border-radius-bottomleft: 6px;
+  -moz-border-radius-bottomight: 6px;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+.thumbnail > .caption{
+  padding: 3px !important;
+}
+.thumbnail > .caption > h4{
+  margin: 0px;
+}
+#side-menu > li {
+  border-bottom: 1px solid #f2f2f2;
+}
+#side-menu > li > a {
+  padding: 5px !important;
+}
+.nav .arrow {
+    float: right;
+}
+.nav .fa.arrow:before {
+    content: "\f104";
+}
+.nav .active>a>.fa.arrow:before {
+    content: "\f107";
+}
+.nav .nav-second-level li,
+.nav .nav-third-level li {
+    border-bottom: 0!important;
+}
+.nav .nav-second-level li a {
+    padding: 5px 0px 5px 37px !important;
+}
+.nav .nav-third-level li a {
+    padding: 5px 0px 5px 52px !important;
 }

@@ -14,8 +14,8 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://urena.sharksoft.com.mx/'; 
-//$config['base_url']	= 'http://localhost/urena/';
+/*$config['base_url']	= 'http://urena.sharksoft.com.mx/'; */
+$config['base_url']	= 'http://localhost/urena/';
 
 /*
 |--------------------------------------------------------------------------

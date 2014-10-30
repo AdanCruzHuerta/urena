@@ -51,7 +51,7 @@ class Home extends CI_Controller {
 			$apellido_p = $this->input->post("ap_paterno");
 			$apellido_m = $this->input->post("ap_materno");
 			
-			$usuario = $this->usuario_model->insert_user($email,sha1(md5($password)),$rol);
+			$usuario = $this->usuario_model->insert_user($email,sha1(md5($password)));
 
 			$persona = $this->usuario_model->insert_persona($nombre,$apellido_p,$apellido_m,$usuario);
 

@@ -8,7 +8,6 @@
 		<link rel="icon" href="media/favicon/favicon.ico">
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
-		<!-- <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css"> -->
 		<link rel="stylesheet" type="text/css" href="css/animate.min.css">
 		<link rel="stylesheet" type="text/css" href="css/normalize.css">
 		<link rel="stylesheet" type="text/css" href="css/urena.css">
@@ -57,7 +56,7 @@
 							</div>
 							<div class="carrito hidden-xs">
 								<button id="btn-carrito" type="button" class="btn btn-link" data-toggle="modal" data-target="#modal-carrito" >
-									<i class="fa fa-shopping-cart fa-5x"></i><kbd>0</kbd>
+									$0.00 <i class="fa fa-shopping-cart"></i><!-- <kbd>0</kbd> -->
 								</button>
 							</div>
 						</div>
@@ -144,12 +143,12 @@
 		<div class="modal fade" id="modal-acceso" tabindex="-1" role="dialog" aria-labelleby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-sm">
 				<div class="modal-content">
-					<div class="modal-header head-modal">
+					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h4 class="modal-title">Inicia Sesión</h4>
 					</div>
 					<form action="#" method="post">
-					<div class="modal-body body-modal">
+					<div class="modal-body">
 							<div class="form-group">
 								<label for="">Email</label>
 								<input type="email" class="form-control" placeholder="Ingresa tu email" required>
@@ -160,7 +159,7 @@
 							</div>
 					</div>
 					<div class="modal-footer">
-						<input type="submit" class="btn btn-primary" value="Iniciar">
+						<input type="submit" class="btn btn-block btn-primary" value="Iniciar">
 					</div>
 					</form>
 				</div>
