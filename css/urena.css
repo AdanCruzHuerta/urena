@@ -520,3 +520,6 @@ h2{color:#0b56a8;}
 .nav .nav-third-level li a {
     padding: 5px 0px 5px 52px !important;
 }
+.thumbnail{
+  cursor: pointer;
+}

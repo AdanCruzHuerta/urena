@@ -242,12 +242,10 @@
 	                            </div>
 	                        </li>
 	                        <li>
-	                            <a class="active" href="index.html"><i class="fa fa-user fa-fw"></i> Clientes <span class="fa arrow"></span></a>
-	                            <ul class="nav nav-second-level">
-	                                <li>
-	                                    <a href="#">Consulta</a>
-	                                </li>
-	                            </ul>
+	                            <a href="<?php echo site_url("admon/inicio");?>" class="<?php if($contenido == "admon/inicio"){echo "active";} ?>" ><i class="fa fa-bar-chart-o fa-fw"></i> Estadisticas</a>
+	                        </li>
+	                        <li>
+	                            <a href="<?php echo site_url("admon/clientes");?>" class="<?php if($contenido == "admon/clientes"){echo "active";} ?>" ><i class="fa fa-users fa-fw"></i> Clientes</a>
 	                        </li>
 	                        <li>
 	                            <a href="#"><i class="fa fa-truck fa-fw"></i> Fleteras<span class="fa arrow"></span></a>
@@ -292,7 +290,7 @@
 		                                <a href="#">Consulta</a>
 		                            </li>
 		                            <li>
-		                                <a href="#">Alta</a>
+		                                <a href="<?php echo site_url("admon/alta_proveedor");?>">Alta</a>
 		                            </li>
 		                            <li>
 		                                <a href="#">Baja</a>

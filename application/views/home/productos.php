@@ -1,4 +1,3 @@
-<link rel="stylesheet" type="text/css" href="css/lightbox.css">		
 <section>
 	<div class="container">
 		<br>
@@ -61,9 +60,7 @@
 				<div class="row">
 					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
 						<div class="thumbnail">
-							<a href="media/imagenes/producto1.jpg" data-toggle="lightbox" data-title="Producto 1">
-								<img src="media/imagenes/producto1.jpg" alt="" class="img-rounded">
-							</a>
+							<img src="media/imagenes/producto1.jpg" alt="" class="img-rounded">
 							<div class="caption">
 								<h4>Producto 1</h4>
 							</div>
@@ -71,9 +68,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
 						<div class="thumbnail">
-							<a href="media/imagenes/producto2.jpg" data-toggle="lightbox" data-title="Producto 1">
-								<img src="media/imagenes/producto2.jpg" alt="" class="img-rounded">
-							</a>
+							<img src="media/imagenes/producto2.jpg" alt="" class="img-rounded">
 							<div class="caption">
 								<h4>Producto 2</h4>
 							</div>
@@ -81,9 +76,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
 						<div class="thumbnail">
-							<a href="media/imagenes/producto3.jpg" data-toggle="lightbox" data-title="Producto 1">
-								<img src="media/imagenes/producto3.jpg" alt="" class="img-rounded">
-							</a>
+							<img src="media/imagenes/producto3.jpg" alt="" class="img-rounded">
 							<div class="caption">
 								<h4>Producto 3</h4>
 							</div>
@@ -91,9 +84,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
 						<div class="thumbnail">
-							<a href="media/imagenes/producto4.jpg" data-toggle="lightbox" data-title="Producto 1">
-								<img src="media/imagenes/producto4.jpg" alt="" class="img-rounded">
-							</a>
+							<img src="media/imagenes/producto4.jpg" alt="" class="img-rounded">
 							<div class="caption">
 								<h4>Producto 4</h4>
 							</div>
@@ -101,9 +92,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
 						<div class="thumbnail">
-							<a href="media/imagenes/producto1.jpg" data-toggle="lightbox" data-title="Producto 1">
-								<img src="media/imagenes/producto1.jpg" alt="" class="img-rounded">
-							</a>
+							<img src="media/imagenes/producto1.jpg" alt="" class="img-rounded">
 							<div class="caption">
 								<h4>Producto 5</h4>
 							</div>
@@ -111,9 +100,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
 						<div class="thumbnail">
-							<a href="media/imagenes/producto2.jpg" data-toggle="lightbox" data-title="Producto 1">
-								<img src="media/imagenes/producto2.jpg" alt="" class="img-rounded">
-							</a>
+							<img src="media/imagenes/producto2.jpg" alt="" class="img-rounded">
 							<div class="caption">
 								<h4>Producto 6</h4>
 							</div>
@@ -121,9 +108,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
 						<div class="thumbnail">
-							<a href="media/imagenes/producto3.jpg" data-toggle="lightbox" data-title="Producto 1">
-								<img src="media/imagenes/producto3.jpg" alt="" class="img-rounded">
-							</a>
+							<img src="media/imagenes/producto3.jpg" alt="" class="img-rounded">
 							<div class="caption">
 								<h4>Producto 7</h4>
 							</div>
@@ -131,9 +116,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
 						<div class="thumbnail">
-							<a href="media/imagenes/producto4.jpg" data-toggle="lightbox" data-title="Producto 1">
-								<img src="media/imagenes/producto4.jpg" alt="" class="img-rounded">
-							</a>
+							<img src="media/imagenes/producto4.jpg" alt="" class="img-rounded">
 							<div class="caption">
 								<h4>Producto 8</h4>
 							</div>
@@ -141,9 +124,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
 						<div class="thumbnail">
-							<a href="media/imagenes/producto1.jpg" data-toggle="lightbox" data-title="Producto 1">
-								<img src="media/imagenes/producto1.jpg" alt="" class="img-rounded">
-							</a>
+							<img src="media/imagenes/producto1.jpg" alt="" class="img-rounded">
 							<div class="caption">
 								<h4>Producto 9</h4>
 							</div>
@@ -151,9 +132,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
 						<div class="thumbnail">
-							<a href="media/imagenes/producto2.jpg" data-toggle="lightbox" data-title="Producto 1">
-								<img src="media/imagenes/producto2.jpg" alt="" class="img-rounded">
-							</a>
+							<img src="media/imagenes/producto2.jpg" alt="" class="img-rounded">
 							<div class="caption">
 								<h4>Producto 10</h4>
 							</div>
@@ -161,9 +140,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
 						<div class="thumbnail">
-							<a href="media/imagenes/producto3.jpg" data-toggle="lightbox" data-title="Producto 1">
-								<img src="media/imagenes/producto3.jpg" alt="" class="img-rounded">
-							</a>
+							<img src="media/imagenes/producto3.jpg" alt="" class="img-rounded">
 							<div class="caption">
 								<h4>Producto 11</h4>
 							</div>
@@ -171,9 +148,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
 						<div class="thumbnail">
-							<a href="media/imagenes/producto4.jpg" data-toggle="lightbox" data-title="Producto 1">
-								<img src="media/imagenes/producto4.jpg" alt="" class="img-rounded">
-							</a>
+							<img src="media/imagenes/producto4.jpg" alt="" class="img-rounded">
 							<div class="caption">
 								<h4>Producto 12</h4>
 							</div>
@@ -183,18 +158,33 @@
 			</div>
 		</div>
 	</div>
+	<!-- <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modal-producto">Modal</button> -->
 </section>
 <br>
 <br>
-<script type="text/javascript" src="js/lightbox.min.js"></script>
+<div class="modal fade" id="modal-producto">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title">Modal title</h4>
+			</div>
+			<div class="modal-body">
+				<center>
+					<i class="fa fa-spinner fa-spin fa-5x"></i>
+				</center>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
 <script>
 	$(document).ready(function(){
-		$(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
-			event.preventDefault();
-			$(this).ekkoLightbox();
-			$('label.tree-toggler').click(function () {
-				$(this).parent().children('ul.tree').toggle(300);
-			});
+		$('.thumbnail').click(function(){
+			$('#modal-producto').modal('show');
 		});
 		$(function() {
 			$('#side-menu').metisMenu();

@@ -1,4 +1,3 @@
-
 <?php 
 class Admin_model extends CI_Model{
 	public function __construct(){
@@ -12,4 +11,3 @@ class Admin_model extends CI_Model{
 						->row();
 	}
 }
-?>

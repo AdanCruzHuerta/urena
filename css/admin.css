@@ -337,3 +337,6 @@ table.dataTable thead .sorting:after {
 .panel-yellow a:hover {
     color: #df8a13;
 }
+.help-block {
+    margin: 0px !important;
+}

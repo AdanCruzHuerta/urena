@@ -6,20 +6,30 @@ class Admon extends CI_Controller {
 		parent::__construct();
 		$this->load->model('admin_model');
 		$this->load->model('personas_model');
+		$this->load->model('localidad_model');
+		$this->load->model('proveedor_model');
 	}
-
 	public function index(){
 		$this->load->view('admon/login');
 	}
-
+	public function verifica_usuario(){
+		if($this->input->post()){
+			$email = $this->input->post('email');
+			$password = $this->input->post('password');
+			$admin = $this->admin_model->valida($email,$password);
+			if(is_object($admin)){
+				echo json_encode(true);
+			} else{
+				echo json_encode(false);
+			}
+		}
+	}
 	public function login(){
 		if($this->input->post()){
 			$email = $this->input->post('email');
 			$password = $this->input->post('password');
 			//$password = md5(sha1($this->input->post('password')));
-
 			$admin = $this->admin_model->valida($email,$password);
-			//die(var_dump($admin));
 			if(is_object($admin)){
 				$this->session->set_userdata('email',$admin->email);
 				$this->session->set_userdata('nombre',$admin->nombre);
@@ -33,7 +43,10 @@ class Admon extends CI_Controller {
 			}
 		}
 	}
-
+	public function logout(){
+		$this->session->sess_destroy();
+		redirect('admon');
+	}
 	public function inicio(){
 		if($this->session->userdata('nombre') && $this->session->userdata('email')){
 			$data = array('contenido'=>'admon/inicio');
@@ -43,30 +56,48 @@ class Admon extends CI_Controller {
 			redirect('admon');
 		}
 	}
-
 	public function clientes(){
-		if($this->session->userdata('nombre') && $this->session->userdata('email')){
+		if($this->session->userdata('nombre')){
+			$clientes = $this->personas_model->get_clientes();
+			$data = array('contenido'=>'admon/clientes',
+							'clientes'=>$clientes);
+			$this->load->view('admon/template',$data);
+		} else{
+			redirect('admon');
+		}
+	}
+	public function alta_proveedor(){
+		if($this->session->userdata('nombre')){
+			$estados = $this->localidad_model->estados();
+			$data = array('contenido'=>'admon/proveedor_alta','estados'=>$estados);
+			$this->load->view('admon/template',$data);
+		}else{
+			redirect('admon');
+		}
+	}
+	public function municipios(){
+		if ($this->input->post()) {
+			$municipios = $this->localidad_model->municipios($this->input->post('estado'));
+			echo json_encode($municipios);
+		}
+	}
+	public function registra_proveedor(){
+		if($this->session->userdata('nombre')){
 			if($this->input->post()){
-				$clientes = $this->personas_model->get_clientes();
-				if(is_array($clientes)){
-					echo json_encode($clientes);
-				}
-				else{
-					echo json_encode(false);
-				}
+				$proveedor = $this->input->post('proveedor');
+				$municipio = $this->input->post('municipio');
+				$direccion = $this->input->post('direccion');
+				$telefono = $this->input->post('telefono');
+				$email = $this->input->post('email');
+				$responsable = $this->input->post('responsable');
+				$fecha_inicio =  date("Y-m-d");
+				$this->proveedor_model->registra_proveedor($proveedor,$municipio,$direccion,$telefono,$email,$responsable,$fecha_inicio);
+				echo json_encode(array("resp"=>true,"mensaje"=>"El proveedor se registro correctamente"));
+			}else{
+				echo json_encode(array("resp"=>false,"mensaje"=>"Error al registrar a proveedor"));
 			}
-			else{
-				echo json_encode(false);
-			}
-		}
-		else{
-			echo json_encode(false);
+		}else{
+			echo json_encode(array("resp"=>false,"mensaje"=>"Su sesión se ha cerrado, Inicie sesión nuevamente"));
 		}
 	}
-
-	public function logout(){
-		$this->session->sess_destroy();
-		redirect('admon');
-	}
-	
 }
