@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="css/datatables.bootstrap.css">
+<link rel="stylesheet" type="text/css" href="css/dataTables.bootstrap.css">
 <div class="row">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<h2><i class="fa fa-shopping-cart"></i> Proveedores</h2>
@@ -9,7 +9,7 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+	<div class="col-xs-12 col-sm-12 col-md-9 col-lg-8">
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<table class="table table-hover">
@@ -49,12 +49,12 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+	<div class="col-xs-12 col-sm-12 col-md-3 col-lg-4">
 	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti in ad molestias error earum perspiciatis saepe ipsam ullam, soluta aperiam quo sed consequatur amet. Laboriosam ipsam facilis quo molestiae, expedita?
 	</div>
 </div>
-<script type="text/javascript" src="js/datatables.js"></script>
-<script type="text/javascript" src="js/datatables.bootstrap.js"></script>
+<script type="text/javascript" src="js/dataTables.js"></script>
+<script type="text/javascript" src="js/dataTables.bootstrap.js"></script>
 <script>
 	$(document).ready(function(){
 		$('.table').dataTable();

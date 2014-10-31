@@ -347,3 +347,12 @@ table.dataTable thead .sorting:after {
     margin: 0px;
     font-size: 1.3em;
 }
+
+@media(max-width:768px) {
+    
+}
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+    .hidden-sm{
+        display: none;
+    }
+}
