@@ -8,6 +8,7 @@ class Admon extends CI_Controller {
 		$this->load->model('personas_model');
 		$this->load->model('localidad_model');
 		$this->load->model('proveedor_model');
+		$this->load->model('fleteras_model');
 	}
 	public function index(){
 		$this->load->view('admon/login');
@@ -95,6 +96,52 @@ class Admon extends CI_Controller {
 				echo json_encode(array("resp"=>true,"mensaje"=>"El proveedor se registro correctamente"));
 			}else{
 				echo json_encode(array("resp"=>false,"mensaje"=>"Error al registrar a proveedor"));
+			}
+		}else{
+			echo json_encode(array("resp"=>false,"mensaje"=>"Su sesión se ha cerrado, Inicie sesión nuevamente"));
+		}
+	}
+	public function fleteras(){
+		if($this->session->userdata('nombre')){
+			$fleteras = $this->fleteras_model->get_fleteras();
+			$data['fleteras'] = $fleteras;
+			$data['contenido'] = 'admon/fleteras';
+			$this->load->view('admon/template',$data); 
+		}else{
+			redirect('admon');
+		}
+	}
+	public function fletera(){
+		if($this->session->userdata('nombre')){
+			if($this->input->post()){
+				$estados = $this->localidad_model->estados();
+				$fletera = $this->fleteras_model->fletera($this->input->post('id'));
+				$data['contenido'] = 'admon/fletera';
+				$data['fletera'] = $fletera;
+				$data['estados'] = $estados;
+				$this->load->view('admon/template',$data);
+			}else{
+				redirect('admon/fleteras');
+			}
+		}else{
+			redirect('admon');
+		}
+	}
+	public function actualiza_fletera(){
+		if($this->session->userdata('nombre')){
+			if($this->input->post()){
+				$id = $this->input->post('id');
+				$proveedor = $this->input->post('proveedor');
+				$municipio = $this->input->post('municipio');
+				$ciudad = $this->input->post('ciudad');
+				$direccion = $this->input->post('direccion');
+				$telefono = $this->input->post('telefono');
+				$email = $this->input->post('email');
+				$responsable = $this->input->post('responsable');
+				$this->fleteras_model->actualiza_fletera($id,$proveedor,$municipio,$ciudad,$direccion,$telefono,$email,$responsable);
+				echo json_encode(array("resp"=>true,"mensaje"=>"El proveedor se modifico correctamente"));
+			}else{
+				echo json_encode(array("resp"=>false,"mensaje"=>"Error al modificar a proveedor"));
 			}
 		}else{
 			echo json_encode(array("resp"=>false,"mensaje"=>"Su sesión se ha cerrado, Inicie sesión nuevamente"));

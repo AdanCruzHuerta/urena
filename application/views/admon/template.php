@@ -8,7 +8,7 @@
    		<meta name="description" content="Pagina de administrador de Contexto">
     	<meta name="author" content="SharkSoft">
 		<title>Meblería Ureña</title>
-		<link rel="icon" href="">
+		<link rel="icon" href="media/favicon/favicon.ico">
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/animate.min.css">
 		<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
@@ -252,13 +252,7 @@
 	                            <a href="#"><i class="fa fa-truck fa-fw"></i> Fleteras<span class="fa arrow"></span></a>
 	                            <ul class="nav nav-second-level">
 	                                <li>
-	                                    <a href="#">Consulta</a>
-	                                </li>
-	                                <li>
-	                                    <a href="#">Alta</a>
-	                                </li>
-	                                <li>
-	                                    <a href="#">Baja</a>
+	                                    <a href="<?php echo site_url("admon/fleteras");?>">Consultar</a>
 	                                </li>
 	                            </ul>
 	                        </li>
