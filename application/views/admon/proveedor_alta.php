@@ -122,6 +122,9 @@
 					$("html, body").animate({scrollTop:"0px"});
 					if(result.resp){
 						$('#alerta').html('<div class="alert alert-success" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Exito!</strong>&nbsp;'+result.mensaje+'</div>');
+						$('#form-proveedor').each(function(){
+							this.reset();
+						});
 					} else{
 						$('#alerta').html('<div class="alert alert-danger" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Error!</strong>&nbsp;'+result.mensaje+'</div>');
 					}

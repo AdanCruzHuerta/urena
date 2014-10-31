@@ -8,6 +8,7 @@ class Admon extends CI_Controller {
 		$this->load->model('personas_model');
 		$this->load->model('localidad_model');
 		$this->load->model('proveedor_model');
+		$this->load->model('fleteras_model');
 	}
 	public function index(){
 		$this->load->view('admon/login');
@@ -98,6 +99,16 @@ class Admon extends CI_Controller {
 			}
 		}else{
 			echo json_encode(array("resp"=>false,"mensaje"=>"Su sesión se ha cerrado, Inicie sesión nuevamente"));
+		}
+	}
+	public function fleteras(){
+		if($this->session->userdata('nombre')){
+			$fleteras = $this->fleteras_model->get_fleteras();
+			$data['fleteras'] = $fleteras;
+			$data['contenido'] = 'admon/fleteras';
+			$this->load->view('admon/template',$data); 
+		}else{
+			redirect('admon');
 		}
 	}
 }
