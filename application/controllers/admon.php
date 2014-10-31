@@ -100,4 +100,46 @@ class Admon extends CI_Controller {
 			echo json_encode(array("resp"=>false,"mensaje"=>"Su sesión se ha cerrado, Inicie sesión nuevamente"));
 		}
 	}
+	public function proveedores(){
+		if($this->session->userdata('nombre')){
+			$proveedores = $this->proveedor_model->proveedores();
+			$data = array('contenido'=>'admon/proveedores','proveedores'=>$proveedores);
+			$this->load->view('admon/template',$data);
+		}else{
+			redirect('admon');
+		}
+	}
+	public function proveedor(){
+		if($this->session->userdata('nombre')){
+			if ($this->input->post()) {
+				$estados = $this->localidad_model->estados();
+				$proveedor = $this->proveedor_model->proveedor($this->input->post('id'));
+				$data = array('contenido'=>'admon/proveedor','proveedor'=>$proveedor,'estados'=>$estados);
+				$this->load->view('admon/template',$data);
+			}else{
+				redirect('admon/proveedores');
+			}
+		}else{
+			redirect('admon');
+		}
+	}
+	public function actualiza_proveedor(){
+		if($this->session->userdata('nombre')){
+			if($this->input->post()){
+				$id = $this->input->post('id');
+				$proveedor = $this->input->post('proveedor');
+				$municipio = $this->input->post('municipio');
+				$direccion = $this->input->post('direccion');
+				$telefono = $this->input->post('telefono');
+				$email = $this->input->post('email');
+				$responsable = $this->input->post('responsable');
+				$this->proveedor_model->actualiza_proveedor($id,$proveedor,$municipio,$direccion,$telefono,$email,$responsable);
+				echo json_encode(array("resp"=>true,"mensaje"=>"El proveedor se modifico correctamente"));
+			}else{
+				echo json_encode(array("resp"=>false,"mensaje"=>"Error al modificar a proveedor"));
+			}
+		}else{
+			echo json_encode(array("resp"=>false,"mensaje"=>"Su sesión se ha cerrado, Inicie sesión nuevamente"));
+		}
+	}
 }

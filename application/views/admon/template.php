@@ -10,8 +10,9 @@
 		<title>Meblería Ureña</title>
 		<link rel="icon" href="">
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="css/admin.css">
+		<link rel="stylesheet" type="text/css" href="css/animate.min.css">
 		<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="css/admin.css">
 		<script type="text/javascript" src="js/jquery.min.js"></script>
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="js/admin.js"></script>
@@ -287,7 +288,7 @@
 	                            <a href="#"><i class="fa fa-shopping-cart fa-fw"></i> Proveedores<span class="fa arrow"></span></a>
 	                            <ul class="nav nav-second-level">
 		                            <li>
-		                                <a href="#">Consulta</a>
+		                                <a href="<?php echo site_url("admon/proveedores");?>">Consulta</a>
 		                            </li>
 		                            <li>
 		                                <a href="<?php echo site_url("admon/alta_proveedor");?>">Alta</a>

@@ -340,3 +340,10 @@ table.dataTable thead .sorting:after {
 .help-block {
     margin: 0px !important;
 }
+.btn-accion{
+    background-color: transparent;
+    border-color: transparent;
+    padding: 0px;
+    margin: 0px;
+    font-size: 1.3em;
+}
