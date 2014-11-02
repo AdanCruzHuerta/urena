@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-		<h2><i class="fa fa-shopping-cart"></i> Alta proveedor</h2>
+		<h2><i class="fa fa-shopping-cart"></i> Proveedores</h2>
 		<ol class="breadcrumb breadcrumb-arrow">
 			<li><a href="<?php echo site_url("admon/inicio");?>">Home</a></li>
 			<li><a href="<?php echo site_url("admon/proveedores");?>">Proveedores</a></li>
@@ -71,6 +71,7 @@
 							</div>
 						</div>
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							<a href="<?php echo site_url("admon/proveedores");?>" class="btn btn-default pull-left">Regresar</a>
 							<input type="submit" class="btn btn-primary pull-right" value="Registrar">
 						</div>
 					</form>
@@ -128,8 +129,7 @@
 					} else{
 						$('#alerta').html('<div class="alert alert-danger" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Error!</strong>&nbsp;'+result.mensaje+'</div>');
 					}
-					$('div.has-success').removeClass('.has-success');
-					$('#registro').each(function(){
+					$('#form-proveedor').each(function(){
 						this.reset();
 					});
 				}, "json");

@@ -7,7 +7,6 @@ class Fleteras_model extends CI_Model{
 	public function get_fleteras(){
 		return $this->db->get('fleteras')->result();
 	}
-
 	public function fletera($id){
 		return $this->db->select('fleteras.id as id')
 						->select('fleteras.nombre as nombre')
@@ -25,10 +24,19 @@ class Fleteras_model extends CI_Model{
 						->get()
 						->row();
 	}
-
-	public function actualiza_fletera($id,$proveedor,$municipio,$ciudad,$direccion,$telefono,$email,$responsable){
-		return $this->db->set('nombre',$proveedor)
-						->set('municipios_id',$municipio)
+	public function registra_fletera($fletera,$municipio,$ciudad,$direccion,$telefono,$email,$responsable){
+		return $this->db->set('nombre',$fletera)
+						->set('municipio_id',$municipio)
+						->set('ciudad',$ciudad)
+						->set('direccion',$direccion)
+						->set('telefono',$telefono)
+						->set('email',$email)
+						->set('responsable',$responsable)
+						->insert('fleteras');
+	}
+	public function actualiza_fletera($id,$fletera,$municipio,$ciudad,$direccion,$telefono,$email,$responsable){
+		return $this->db->set('nombre',$fletera)
+						->set('municipio_id',$municipio)
 						->set('ciudad',$ciudad)
 						->set('direccion',$direccion)
 						->set('telefono',$telefono)

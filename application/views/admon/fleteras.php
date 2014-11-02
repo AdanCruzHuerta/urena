@@ -48,6 +48,7 @@
 				</table>
 			</div>
 		</div>
+		<a href="<?php echo site_url("admon/alta_fletera");?>" class="btn btn-primary pull-right">Agregar Nuevo</a>
 	</div>
 	<div class="hidden-xs hidden-sm col-md-3 col-lg-3">
 		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur voluptates tenetur facere dolore numquam reiciendis, itaque labore sequi animi laboriosam, quisquam fugit sint dolores cupiditate minus quos dolorem iure fugiat.
