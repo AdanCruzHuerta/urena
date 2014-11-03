@@ -228,4 +228,21 @@ class Admon extends CI_Controller {
 			echo json_encode(array("resp"=>false,"mensaje"=>"Su sesión se ha cerrado, Inicie sesión nuevamente"));
 		}
 	}
+	public function categorias(){
+		if($this->session->userdata('nombre')){
+			#$proveedores = $this->proveedor_model->proveedores();
+			$data = array('contenido'=>'admon/categorias','categorias'=>"");
+			$this->load->view('admon/template',$data);
+		}else{
+			redirect('admon');
+		}
+	}
+	public function categoria(){
+		if($this->session->userdata('nombre')){
+			$data = array('contenido'=>'admon/categoria');
+			$this->load->view('admon/template',$data);
+		}else{
+			redirect('admon');
+		}
+	}
 }

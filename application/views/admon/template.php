@@ -263,7 +263,7 @@
 	                            <a href="#"><i class="fa fa-book fa-fw"></i> Productos<span class="fa arrow"></span></a>
 	                            <ul class="nav nav-second-level">
 		                            <li>
-		                                <a href="#">Categorias</a>
+		                                <a href="<?php echo site_url("admon/categorias");?>">Categorias</a>
 		                            </li>
 		                            <li>
 		                                <a href="#">Articulos</a>
