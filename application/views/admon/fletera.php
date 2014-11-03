@@ -18,9 +18,9 @@
 						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 							<div class="form-horizontal">
 								<div class="form-group">
-									<label for="proveedor" class="control-label	col-sm-4">Fletera</label>
+									<label for="fletera" class="control-label	col-sm-4">Fletera</label>
 									<div class="col-sm-8">
-										<input type="text" class="form-control" name="proveedor" id="proveedor" value="<?php echo $fletera->nombre;?>">
+										<input type="text" class="form-control" name="fletera" id="fletera" value="<?php echo $fletera->nombre;?>">
 									</div>
 								</div>
 								<div class="form-group">
@@ -77,6 +77,7 @@
 							</div>
 						</div>
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							<a href="<?php echo site_url("admon/fleteras");?>" class="btn btn-default pull-left">Regresar</a>
 							<input type="hidden" name="id" id="id" value="<?php echo $fletera->id;?>">
 							<input type="submit" class="btn btn-primary pull-right" value="Guardar">
 							<input type="submit" class="btn btn-danger pull-right" value="Eliminar" style="margin-right:10px;">
@@ -124,13 +125,14 @@
 				}
 			});
 		});
-		var validacion = $('#form-proveedor').validate({
+		var validacion = $('#form-fletera').validate({
 			errorElement: "span",
 			errorClass: "help-block",
 			rules: {
-				proveedor: {required: true, minlength: 3},
+				fletera: {required: true, minlength: 3},
 				estado: {required: true},
 				municipio: {required: true},
+				ciudad: {required: true, minlength: 3},
 				direccion: {required: true, minlength: 3},
 				telefono: {required: true, number: true},
 				email: {required: true, email: true},

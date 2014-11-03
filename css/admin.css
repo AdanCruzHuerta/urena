@@ -17,6 +17,10 @@ body {
         padding: 0 30px;
         border-left: 1px solid #e7e7e7;
     }
+    .navbar-right {
+    float: right !important;
+    margin-right: 0px !important;
+    }
 }
 .navbar-top-links li {
     display: inline-block;

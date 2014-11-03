@@ -37,6 +37,7 @@ class Admon extends CI_Controller {
 				$this->session->set_userdata('apellido_p',$admin->apellido_p);
 				$this->session->set_userdata('apellido_m',$admin->apellido_m);
 				$this->session->set_userdata('rol_id', $admin->roles_id);
+				$this->session->set_userdata('img_perfil', $admin->imagen);
 				redirect('admon/inicio');
 			}else{
 				$this->session->sess_destroy();
@@ -47,6 +48,15 @@ class Admon extends CI_Controller {
 	public function logout(){
 		$this->session->sess_destroy();
 		redirect('admon');
+	}
+	public function perfil(){
+		if($this->session->userdata('nombre')){
+			$data = array('contenido'=>'admon/perfil');
+			$this->load->view('admon/template',$data);
+		}else{
+			$this->session->sess_destroy();
+			redirect('admon');
+		}
 	}
 	public function inicio(){
 		if($this->session->userdata('nombre') && $this->session->userdata('email')){
@@ -111,6 +121,35 @@ class Admon extends CI_Controller {
 			redirect('admon');
 		}
 	}
+	public function alta_fletera(){
+		if($this->session->userdata('nombre')){
+			$estados = $this->localidad_model->estados();
+			$data['contenido'] = 'admon/fletera_alta';
+			$data['estados'] = $estados;
+			$this->load->view('admon/template',$data);
+		}else{
+			redirect('admon');
+		}
+	}
+	public function registra_fletera(){
+		if($this->session->userdata('nombre')){
+			if($this->input->post()){
+				$fletera = $this->input->post('fletera');
+				$municipio = $this->input->post('municipio');
+				$ciudad = $this->input->post('ciudad');
+				$direccion = $this->input->post('direccion');
+				$telefono = $this->input->post('telefono');
+				$email = $this->input->post('email');
+				$responsable = $this->input->post('responsable');
+				$this->fleteras_model->registra_fletera($fletera,$municipio,$ciudad,$direccion,$telefono,$email,$responsable);
+				echo json_encode(array("resp"=>true,"mensaje"=>"La fletera se registro correctamente"));
+			}else{
+				echo json_encode(array("resp"=>false,"mensaje"=>"Error al registrar la fletera"));
+			}
+		}else{
+			echo json_encode(array("resp"=>false,"mensaje"=>"Su sesión se ha cerrado, Inicie sesión nuevamente"));
+		}
+	}
 	public function fletera(){
 		if($this->session->userdata('nombre')){
 			if($this->input->post()){
@@ -131,7 +170,7 @@ class Admon extends CI_Controller {
 		if($this->session->userdata('nombre')){
 			if($this->input->post()){
 				$id = $this->input->post('id');
-				$proveedor = $this->input->post('proveedor');
+				$proveedor = $this->input->post('fletera');
 				$municipio = $this->input->post('municipio');
 				$ciudad = $this->input->post('ciudad');
 				$direccion = $this->input->post('direccion');
@@ -187,6 +226,23 @@ class Admon extends CI_Controller {
 			}
 		}else{
 			echo json_encode(array("resp"=>false,"mensaje"=>"Su sesión se ha cerrado, Inicie sesión nuevamente"));
+		}
+	}
+	public function categorias(){
+		if($this->session->userdata('nombre')){
+			#$proveedores = $this->proveedor_model->proveedores();
+			$data = array('contenido'=>'admon/categorias','categorias'=>"");
+			$this->load->view('admon/template',$data);
+		}else{
+			redirect('admon');
+		}
+	}
+	public function categoria(){
+		if($this->session->userdata('nombre')){
+			$data = array('contenido'=>'admon/categoria');
+			$this->load->view('admon/template',$data);
+		}else{
+			redirect('admon');
 		}
 	}
 }

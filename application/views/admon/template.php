@@ -220,7 +220,7 @@
 	                    </a>
 	                    <ul class="dropdown-menu dropdown-user">
 	                        <li>
-	                        	<a href="#"><i class="fa fa-user fa-fw"></i> Perfil de Usuario</a>
+	                        	<a href="<?php echo site_url("admon/perfil");?>"><i class="fa fa-user fa-fw"></i> Perfil de Usuario</a>
 	                        </li>
 	                        <li>
 	                        	<a href="<?php echo site_url("admon/logout");?>"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
@@ -233,12 +233,12 @@
 	                    <ul class="nav" id="side-menu">
 	                        <li class="nav-perfil">
 	                            <div class="img-perfil">
-	                                <a href="">
-	                                    <img src="http://placehold.it/100x100/dddddd/333333" class="img-circle img-responsive">
+	                                <a href="<?php echo site_url("admon/perfil");?>">
+	                                    <img src="<?php echo $this->session->userdata('img_perfil');?>" class="img-circle img-responsive">
 	                                </a>
 	                            </div>
 	                            <div class="info-perfil">
-	                                <h4><?php echo $this->session->userdata('nombre')." ".$this->session->userdata('apellido_p')?></h4>
+	                                <h4><?php echo $this->session->userdata('nombre')." ".$this->session->userdata('apellido_p');?></h4>
 	                                <small><?php if($this->session->userdata('rol_id') == "1" ){ echo "Gerente"; } else { echo "Empleado";}?></small>
 	                            </div>
 	                        </li>
@@ -249,12 +249,7 @@
 	                            <a href="<?php echo site_url("admon/clientes");?>" class="<?php if($contenido == "admon/clientes"){echo "active";} ?>" ><i class="fa fa-users fa-fw"></i> Clientes</a>
 	                        </li>
 	                        <li>
-	                            <a href="#"><i class="fa fa-truck fa-fw"></i> Fleteras<span class="fa arrow"></span></a>
-	                            <ul class="nav nav-second-level">
-	                                <li>
-	                                    <a href="<?php echo site_url("admon/fleteras");?>">Consultar</a>
-	                                </li>
-	                            </ul>
+	                            <a href="<?php echo site_url("admon/fleteras");?>"><i class="fa fa-truck fa-fw"></i> Fleteras</a>
 	                        </li>
 	                        <li>
 	                            <a href="#"><i class="fa fa-edit fa-fw"></i> Pedidos <span class="fa arrow"></span></a>
@@ -268,29 +263,15 @@
 	                            <a href="#"><i class="fa fa-book fa-fw"></i> Productos<span class="fa arrow"></span></a>
 	                            <ul class="nav nav-second-level">
 		                            <li>
-		                                <a href="#">Consulta</a>
+		                                <a href="<?php echo site_url("admon/categorias");?>">Categorias</a>
 		                            </li>
 		                            <li>
-		                                <a href="#">Alta</a>
-		                            </li>
-		                            <li>
-		                                <a href="#">Baja</a>
+		                                <a href="#">Articulos</a>
 		                            </li>
 	                            </ul>
 	                        </li>
 	                        <li>
-	                            <a href="#"><i class="fa fa-shopping-cart fa-fw"></i> Proveedores<span class="fa arrow"></span></a>
-	                            <ul class="nav nav-second-level">
-		                            <li>
-		                                <a href="<?php echo site_url("admon/proveedores");?>">Consulta</a>
-		                            </li>
-		                            <li>
-		                                <a href="<?php echo site_url("admon/alta_proveedor");?>">Alta</a>
-		                            </li>
-		                            <li>
-		                                <a href="#">Baja</a>
-		                            </li>
-	                            </ul>
+	                            <a href="<?php echo site_url("admon/proveedores");?>"><i class="fa fa-shopping-cart fa-fw"></i> Proveedores</a>
 	                        </li>
 	                        <li>
 	                            <a href="#"><i class="fa fa-line-chart fa-fw"></i> Ventas</a>
