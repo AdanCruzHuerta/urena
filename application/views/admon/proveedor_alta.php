@@ -24,7 +24,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="estado" class="control-label	col-sm-4">Estado</label>
+									<label for="estado" class="control-label col-sm-4">Estado</label>
 									<div class="col-sm-8">
 										<select name="estado" id="estado" class="form-control">
 											<option value="">Selecciona Estado</option>

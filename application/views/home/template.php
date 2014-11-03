@@ -13,7 +13,6 @@
 		<link rel="stylesheet" type="text/css" href="css/urena.css">
 		<script type="text/javascript" src="js/jquery.min.js"></script>
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="js/validator.js"></script>
 	</head>
 	<body>
 		<nav class="visible-xs">
@@ -172,8 +171,8 @@
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h4 class="modal-title">Regístrate en Muebleria Ureña!</h4>
 					</div>
-					<form action="#">
-					<div class="modal-body">
+					<form id="form-registro">
+						<div class="modal-body">
 								<div class="row">
 									<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 										<div id="mensaje" class="alert alert-danger"></div>
@@ -231,10 +230,10 @@
 										
 									</div>
 								</div>
-					</div>
-					<div class="modal-footer">
-						<input type="button" id="btn_enviar" data-loading-text="Cargando..." class="btn btn-primary" value="Registrar">
-					</div>
+						</div>
+						<div class="modal-footer">
+							<input type="button" id="btn_enviar" data-loading-text="Cargando..." class="btn btn-primary" value="Registrar">
+						</div>
 					</form>
 				</div>
 			</div>
@@ -292,6 +291,8 @@
 				</div>
 			</div>
 		</div>
+		<script type="text/javascript" src="js/validate.js"></script>
+		<script type="text/javascript" src="js/messages_es.js"></script>
 		<script>
 			$(document).ready(function(){
 				$( ".btn_nav" ).hover(
@@ -313,6 +314,29 @@
 				sideslider.click(function(event){
 					$(sel).toggleClass('in');
 					$(sel2).toggleClass('out');
+				});
+				
+				var validacion = $('#form-registro').validate({
+					errorElement: "span",
+					errorClass:"help-block",
+					rules:{
+						email:{required:true, email:true},
+						c_email:{required:true, email:true},
+						nombre:{required: true, minlength: 3},
+						ap_paterno:{required: true, minlength: 3},
+						ap_materno:{required: false},
+						password:{required:true},
+						c_password:{required:true},
+					},
+					highlight: function(element, error){
+						$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+					},
+					success: function(element){
+						$(element).closest('form-group').removeClass('has-error').addClass('has-success');
+					},
+					submitHandler: function (){
+						console.log("Formulario Valido");
+					}
 				});
 			});
 		</script>
