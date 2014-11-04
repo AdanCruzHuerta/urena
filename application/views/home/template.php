@@ -156,6 +156,9 @@
 								<label for="">Contraseña</label>
 								<input type="password" class="form-control" placeholder="Ingresa tu contraseña" required>
 							</div>
+							<div class="form-group pull-right">
+								<a href="">¿Olvidaste tu contraseña?</a>
+							</div><br>
 					</div>
 					<div class="modal-footer">
 						<input type="submit" class="btn btn-block btn-primary" value="Iniciar">
@@ -171,7 +174,8 @@
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h4 class="modal-title">Regístrate en Muebleria Ureña!</h4>
 					</div>
-					<form id="form-registro">
+					<div id="alerta"></div>
+					<form id = "form-registro">
 						<div class="modal-body">
 								<div class="row">
 									<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -180,49 +184,49 @@
 									</div>
 									<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 										<div class="form-group">
-											<label for="">*Email</label>
-											<input type="email" id="email" class="form-control">
+											<label for="email" class="control-label">*Email</label>
+											<input type="email" id="email" name="email" class="form-control">
 										</div>
 									</div>
 									<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 										<div class="form-group">
-											<label for="">*Confirma Email</label>
-											<input type="email" id="c_email" class="form-control">
+											<label for="c_email" class="control-label">*Confirma Email</label>
+											<input type="email" id="c_email" name="c_email" class="form-control">
 										</div>
 									</div>
 									<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 										<div class="form-group">
-											<label for="">*Nombre</label>
-											<input type="text" id="nombre" class="form-control">
+											<label for="nombre" class="control-label">*Nombre</label>
+											<input type="text" id="nombre" name="nombre" class="form-control">
 										</div>
 									</div>
 									<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 										<div class="form-group">
-											<label for="">*Apellido Paterno</label>
-											<input type="email" id="ap_paterno" class="form-control">
+											<label for="ap_paterno" class="control-label">*Apellido Paterno</label>
+											<input type="email" id="ap_paterno" name="ap_paterno" class="form-control">
 										</div>
 									</div>
 									<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 										<div class="form-group">
-											<label for="">*Apellido Materno</label>
-											<input type="email" id="ap_materno" class="form-control">
+											<label for="ap_materno" class="control-label">*Apellido Materno</label>
+											<input type="email" id="ap_materno" name="ap_materno" class="form-control">
 										</div>
 									</div>
 									<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 										<div class="form-group">
-											<label for="">*Contraseña</label>
-											<input type="password" id="password" class="form-control">
+											<label for="password" class="control-label">*Contraseña</label>
+											<input type="password" id="password" name="password" class="form-control">
 										</div>
 									</div>
 									<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 										<div class="form-group">
-											<label for="">*Confirma Contraseña</label>
-											<input type="password" id="c_password" class="form-control">
+											<label for="c_password" class="control-label">*Confirma Contraseña</label>
+											<input type="password" id="c_password" name="c_password" class="form-control">
 										</div>
 									</div>
 									<div class="form-group check-modal">
 										<label for="">
-											<input type="checkbox" id="check_ok" name="reenviar">&nbsp;He leido y acepto los términos de aviso de privacidad.
+											<input type="checkbox" id="check_ok" name="check_ok">&nbsp;He leido y acepto los términos de aviso de privacidad.
 											<a href="#">Leer</a>
 										</label>
 									</div>
@@ -232,7 +236,7 @@
 								</div>
 						</div>
 						<div class="modal-footer">
-							<input type="button" id="btn_enviar" data-loading-text="Cargando..." class="btn btn-primary" value="Registrar">
+							<input type="submit" class="btn btn-primary" value="Registrar">
 						</div>
 					</form>
 				</div>
@@ -321,21 +325,34 @@
 					errorClass:"help-block",
 					rules:{
 						email:{required:true, email:true},
-						c_email:{required:true, email:true},
+						c_email:{required:true, email:true, equalTo:"#email"},
 						nombre:{required: true, minlength: 3},
-						ap_paterno:{required: true, minlength: 3},
-						ap_materno:{required: false},
+						ap_paterno:{required: true, minlength: 3, email:false},
+						ap_materno:{required: true, email:false},
 						password:{required:true},
-						c_password:{required:true},
+						c_password:{required:true, equalTo: "#password"},
 					},
 					highlight: function(element, error){
 						$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
 					},
 					success: function(element){
-						$(element).closest('form-group').removeClass('has-error').addClass('has-success');
+						$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
 					},
 					submitHandler: function (){
-						console.log("Formulario Valido");
+						$.post("<?php echo site_url('home/registra_cliente')?>", $('form#form-registro').serialize(), function(result){
+							$("html, body").animate({scrollTop:"0px"});
+							if(result.resp){
+								$('#alerta').html('<div class="alert alert-success" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Exito!</strong>&nbsp;'+result.mensaje+'</div>');
+								$('#form-registro').each(function(){
+									this.reset();
+								});
+							} else{
+								$('#alerta').html('<div class="alert alert-danger" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Error!</strong>&nbsp;'+result.mensaje+'</div>');
+							}
+							$('#form-registro').each(function(){
+								this.reset();
+							});
+						}, "json");
 					}
 				});
 			});
