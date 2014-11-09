@@ -6,11 +6,13 @@ class Home extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('usuario_model');
+		$this->load->model('pagina_model');
 		$this->load->library('email');
 	}
 
 	public function index(){
-		$data = array('contenido'=>'home/inicio');
+		$slider = $this->pagina_model->getSliderInicio();
+		$data = array('contenido'=>'home/inicio','slider'=>$slider);
 		$this->load->view('home/template',$data);
 	}
 

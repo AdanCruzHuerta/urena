@@ -246,6 +246,9 @@
 	                            <a href="<?php echo site_url("admon/inicio");?>" class="<?php if($contenido == "admon/inicio"){echo "active";} ?>" ><i class="fa fa-bar-chart-o fa-fw"></i> Estadisticas</a>
 	                        </li>
 	                        <li>
+	                            <a href="<?php echo site_url("admon/pagina");?>" class="<?php if($contenido == "admon/pagina"){echo "active";} ?>" ><i class="fa fa-desktop fa-fw"></i> Pagina</a>
+	                        </li>
+	                        <li>
 	                            <a href="<?php echo site_url("admon/clientes");?>" class="<?php if($contenido == "admon/clientes"){echo "active";} ?>" ><i class="fa fa-users fa-fw"></i> Clientes</a>
 	                        </li>
 	                        <li>

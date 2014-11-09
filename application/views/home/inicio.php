@@ -35,21 +35,17 @@
 							<div class="panel-body">
 								<div id="myCarousel" class="carousel slide">
 									<div class="carousel-inner">
-										<div class="item active">
-											<img src="media/imagenes/promo1.jpg" class="img-responsive">
+										<?php $activo = 0; foreach($slider as $row){?>
+										<div class="item <?php if($activo == 0){echo 'active';}?>">
+											<img src="<?php echo $row->ruta; ?>" class="img-responsive">
 										</div>
-										<div class="item">
-											<img src="media/imagenes/promo2.jpg" class="img-responsive">
-										</div>
-										<div class="item">
-											<img src="media/imagenes/promo3.jpg" class="img-responsive">
-										</div>
+										<?php $activo = 1; }?>
 									</div>
 									<a class="left carousel-control" href="#myCarousel" data-slide="prev">
-										<span class="glyphicon glyphicon-chevron-left"></span>
+										<span class="fa fa-chevron-left"></span>
 									</a>
 									<a class="right carousel-control" href="#myCarousel" data-slide="next">
-										<span class="glyphicon glyphicon-chevron-right"></span>
+										<span class="fa fa-chevron-right"></span>
 									</a>
 								</div>
 							</div>
