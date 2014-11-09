@@ -48,6 +48,11 @@ nav{
 .activo {
 	border-bottom: 2px solid #0517EC;
 }
+.left.carousel-control > span,
+.right.carousel-control > span{
+  position: absolute;
+  top: 50%;
+}
 @media screen and (max-width: 768px) {
   body {
     padding-top: 50px;

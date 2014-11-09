@@ -9,6 +9,7 @@ class Admon extends CI_Controller {
 		$this->load->model('localidad_model');
 		$this->load->model('proveedor_model');
 		$this->load->model('fleteras_model');
+		$this->load->model('pagina_model');
 	}
 	public function index(){
 		$this->load->view('admon/login');
@@ -61,6 +62,42 @@ class Admon extends CI_Controller {
 		}else{
 			$this->session->sess_destroy();
 			redirect('admon');
+		}
+	}
+	public function pagina(){
+		if($this->session->userdata('nombre')){
+			$slider = $this->pagina_model->getSlider();
+			$data = array('contenido'=>'admon/pagina', 'slider'=>$slider);
+			$this->load->view('admon/template',$data);
+		} else{
+			redirect('admon');
+		}
+	}
+	public function visivilidad_slider(){
+		if($this->session->userdata('nombre')){
+			if($this->input->post()){
+				$slider = $this->pagina_model->getSliderInicio();
+				$slider = count($slider);
+				if($slider > 1 || $this->input->post('status') == 0){
+					$status = $this->pagina_model->getStaus($this->input->post('id'));
+					if($status->status == 1){
+						$actualiza = $this->pagina_model->actStaus($this->input->post('id'),0);
+					}else{
+						$actualiza = $this->pagina_model->actStaus($this->input->post('id'),1);
+					}
+					if($actualiza){
+						echo json_encode(array("resp"=>true,"mensaje"=>"El cambio fue realizado"));
+					}else{
+						echo json_encode(array("resp"=>false,"mensaje"=>"Error al hacer el cambio"));
+					}
+				}else{
+					echo json_encode(array("resp"=>false,"mensaje"=>"Debe de haber por lo menos 1 imagen visible"));
+				}
+			}else{
+				echo json_encode(array("resp"=>false,"mensaje"=>"Error al enviar los datos"));
+			}
+		}else{
+			echo json_encode(array("resp"=>false,"mensaje"=>"Su sesión se ha cerrado, Inicie sesión nuevamente"));
 		}
 	}
 	public function clientes(){
