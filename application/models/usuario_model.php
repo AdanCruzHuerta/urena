@@ -13,17 +13,15 @@ class Usuario_model extends CI_Model{
 	public function insert_user($email,$password){
 		$this->db->set('email',$email)
 				 ->set('password',$password)
-				 //->set('roles_id',$rol)
 				 ->insert('usuarios');
-				
-			return $this->db->insert_id();
+		return $this->db->insert_id();
 	}
 
-	public function insert_persona($nombre,$apellido_p,$apellido_m,$usuario){
+	public function insert_persona($nombre,$apellido_p,$apellido_m,$usuario_id){
 		return $this->db->set('nombre',$nombre)
 						->set('apellido_p',$apellido_p)
 						->set('apellido_m',$apellido_m)
-						->set('usuarios_id',$usuario)
+						->set('usuarios_id',$usuario_id)
 						->insert('personas');
 	}
 }

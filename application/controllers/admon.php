@@ -45,10 +45,6 @@ class Admon extends CI_Controller {
 			}
 		}
 	}
-	public function logout(){
-		$this->session->sess_destroy();
-		redirect('admon');
-	}
 	public function perfil(){
 		if($this->session->userdata('nombre')){
 			$data = array('contenido'=>'admon/perfil');
@@ -244,5 +240,9 @@ class Admon extends CI_Controller {
 		}else{
 			redirect('admon');
 		}
+	}
+	public function logout(){
+		$this->session->sess_destroy();
+		redirect('admon');
 	}
 }
