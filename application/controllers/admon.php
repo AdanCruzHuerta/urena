@@ -10,6 +10,7 @@ class Admon extends CI_Controller {
 		$this->load->model('proveedor_model');
 		$this->load->model('fleteras_model');
 		$this->load->model('pagina_model');
+		$this->load->model('categorias_model');
 	}
 	public function index(){
 		$this->load->view('admon/login');
@@ -263,9 +264,22 @@ class Admon extends CI_Controller {
 	}
 	public function categorias(){
 		if($this->session->userdata('nombre')){
-			#$proveedores = $this->proveedor_model->proveedores();
-			$data = array('contenido'=>'admon/categorias','categorias'=>"");
-			$this->load->view('admon/template',$data);
+			if($this->input->post()){
+				//$data_model['id'] = $this->input->post('id_categoria');
+				$data_model['nombre'] = $this->input->post('nombre');
+				$categorias_id1 = $this->categorias_model->add_categoria($data_model);
+				$data_model2['categorias_id']  = $this->input->post('id_categoria');
+				$data_model2['categorias_id1'] = $categorias_id1;
+				$this->categorias_model->add_categorias_categorias($data_model2);
+				$data['resp'] = true;
+				$data['categorias'] = $this->categorias_model->get_categorias_home($data_model2['categorias_id']);
+				$data['mensaje'] = "La categoria ha sido creada";
+				echo json_encode($data);
+			}else{
+				$categorias = $this->categorias_model->get_categorias_home(1);
+				$data = array('contenido'=>'admon/categorias','categorias'=> $categorias);
+				$this->load->view('admon/template',$data);
+			}
 		}else{
 			redirect('admon');
 		}

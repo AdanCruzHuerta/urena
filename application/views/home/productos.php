@@ -4,6 +4,12 @@
 		<br>
 		<div class="row">
 			<div class="hidden-xs col-sm-2 col-md-3 col-lg-3">
+				<div class="input-group">
+                	<input type="text" class="form-control" placeholder="Buscar articulo">
+                	<span class="input-group-btn">
+                		<button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+              		</span>
+                </div><br/>
 				<ol class="breadcrumb">
 					<li class="active">Categorias</li>
 				</ol>
@@ -12,41 +18,78 @@
                         <a class="active" href="index.html">Categoria</a>
                     </li>
                     <li>
-                        <a href="#">Charts<span class="fa arrow"></span></a>
+                        <a href="#">Línea Neoclasica<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="flot.html">Flot Charts</a>
+                                <a href="flot.html">Juego de mesa</a>
                             </li>
                             <li>
-                                <a href="morris.html">Morris.js Charts</a>
+                                <a href="morris.html">Centros de entretenimiento</a>
+                            </li>
+                            <li>
+                                <a href="morris.html">Salas</a>
+                            </li>
+                            <li>
+                                <a href="morris.html">Comedores</a>
+                            </li>
+                            <li>
+                                <a href="morris.html">Recamaras</a>
+                            </li>
+                            <li>
+                                <a href="morris.html">Diversos</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="#">Multi-Level Dropdown<span class="fa arrow"></span></a>
+                        <a href="#">Línea Modernista<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="#">Second Level Item</a>
+                                <a href="#">Salas <span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                	<li>
+                                		<a href="#">3-2-1</a>
+                                	</li>
+                                	<li>
+                                		<a href="#">Esquineras</a>
+                                	</li>
+                                </ul>
                             </li>
                             <li>
-                                <a href="#">Second Level Item</a>
+                                <a href="#">Comedores <span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                	<li>
+                                		<a href="#">4 sillas</a>
+                                	</li>
+                                	<li>
+                                		<a href="#">6 sillas</a>
+                                	</li>
+                                	<li>
+                                		<a href="#">8 sillas</a>
+                                	</li>
+                                </ul>
                             </li>
                             <li>
-                                <a href="#">Third Level <span class="fa arrow"></span></a>
+                                <a href="#">Recamaras <span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
                                     <li>
-                                        <a href="#">Third Level Item</a>
+                                        <a href="#">Contemporanea</a>
                                     </li>
                                     <li>
-                                        <a href="#">Third Level Item</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Third Level Item</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Third Level Item</a>
+                                        <a href="#">Infantiles</a>
                                     </li>
                                 </ul>
+                            </li>
+                            <li>
+                            	<a href="#">Centros de entretenimiento</a>
+                            </li>
+                            <li>
+                            	<a href="#">Porta pantallas</a>
+                            </li>
+                            <li>
+                            	<a href="#">Cajoneras</a>
+                            </li>
+                            <li>
+                            	<a href="#">Diversos</a>
                             </li>
                         </ul>
                     </li>

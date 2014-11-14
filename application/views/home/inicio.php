@@ -79,9 +79,14 @@
 			<br>
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-						<div class="cabecera"><div class="text-cabecera">Nuestros Productos</div></div>
+						<div class="cabecera"><div class="text-cabecera">Formas de Pago</div></div>
 						<div class="row">
-							<div class="col-xs-6 col-sm-4 col-md-2 col-lg-2">
+							<center>
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+									<img src="media/imagenes/formaspago.png" alt="">
+								</div>
+							</center>
+							<!-- <div class="col-xs-6 col-sm-4 col-md-2 col-lg-2">
 								<div class="thumbnail">
 									<img src="media/imagenes/producto1.jpg" alt="" class="img-rounded">
 									<div class="caption">
@@ -128,7 +133,7 @@
 										<h4>Categoria 6</h4>
 									</div>
 								</div>
-							</div>
+							</div> -->
 						</div>
 					</div>
 				</div>
