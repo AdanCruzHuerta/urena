@@ -2,6 +2,7 @@
 	<div class="container">
 		<br>
 		<br>
+		 <?php #echo "<pre>"; echo print_r($categorias); echo "</pre>"; echo count($categorias); ?>
 		<div class="row">
 			<div class="hidden-xs col-sm-2 col-md-3 col-lg-3">
 				<div class="input-group">
@@ -14,33 +15,23 @@
 					<li class="active">Categorias</li>
 				</ol>
 				<ul class="nav" id="side-menu">
-                    <li>
-                        <a class="active" href="index.html">Categoria</a>
-                    </li>
-                    <li>
-                        <a href="#">Línea Neoclasica<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="flot.html">Juego de mesa</a>
-                            </li>
-                            <li>
-                                <a href="morris.html">Centros de entretenimiento</a>
-                            </li>
-                            <li>
-                                <a href="morris.html">Salas</a>
-                            </li>
-                            <li>
-                                <a href="morris.html">Comedores</a>
-                            </li>
-                            <li>
-                                <a href="morris.html">Recamaras</a>
-                            </li>
-                            <li>
-                                <a href="morris.html">Diversos</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
+					<?php for($i=0; $i < count($categorias); $i++){
+							if(count($categorias[$i]['subcategorias']) > 0){?>
+							<li>
+								<a href="#"><?php echo $categorias[$i]['nombre']; ?><span class="fa arrow"></span></a>
+								<ul class="nav nav-second-level">
+								<?php for($j=0; $j < count($categorias[$i]['subcategorias']); $j++){?>
+								<li>
+									<a href="flot.html"><?php echo $categorias[$i]['subcategorias'][$j]['nombre']?></a>
+								</li>
+								<?php }?>
+								</ul>
+							<?php }else{ ?>
+							<li>
+								<a href=""><?php echo $categorias[$i]['nombre']; ?></a>
+							</li>
+					<?php }} ?>
+                    <!-- <li>
                         <a href="#">Línea Modernista<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
@@ -92,7 +83,7 @@
                             	<a href="#">Diversos</a>
                             </li>
                         </ul>
-                    </li>
+                    </li> -->
                 </ul>
 			</div>
 			<div class="col-xs-12 col-sm-10 col-md-9 col-lg-9">

@@ -272,11 +272,11 @@ class Admon extends CI_Controller {
 				$data_model2['categorias_id1'] = $categorias_id1;
 				$this->categorias_model->add_categorias_categorias($data_model2);
 				$data['resp'] = true;
-				$data['categorias'] = $this->categorias_model->get_categorias_home($data_model2['categorias_id']);
+				$data['categorias'] = $this->categorias_model->get_categorias($data_model2['categorias_id']);
 				$data['mensaje'] = "La categoria ha sido creada";
 				echo json_encode($data);
 			}else{
-				$categorias = $this->categorias_model->get_categorias_home(1);
+				$categorias = $this->categorias_model->get_categorias(1);
 				$data = array('contenido'=>'admon/categorias','categorias'=> $categorias);
 				$this->load->view('admon/template',$data);
 			}
@@ -290,6 +290,31 @@ class Admon extends CI_Controller {
 			$this->load->view('admon/template',$data);
 		}else{
 			redirect('admon');
+		}
+	}
+	public function subcategorias(){
+		if($this->session->userdata('nombre')){
+			if($this->input->post()){
+				$subcategorias = $this->categorias_model->get_categorias($this->input->post('id'));
+				echo json_encode($subcategorias);
+				#echo json_encode(array("resp"=>true,"mensaje"=>$subcategorias));
+			}else{
+				echo json_encode(array("resp"=>false,"mensaje"=>"Error al consultar categoria"));
+			}
+		}else{
+			echo json_encode(array("resp"=>false,"mensaje"=>"Su sesión se ha cerrado, Inicie sesión nuevamente"));
+		}
+	}
+	public function categoriaAnterior(){
+		if($this->session->userdata('nombre')){
+			if($this->input->post()){
+				$anterior = $this->categorias_model->anterior($this->input->post('id'));
+				echo json_encode($anterior->categorias_id);
+			}else{
+				echo json_encode(array("resp"=>false,"mensaje"=>"Error al consultar categoria"));
+			}
+		}else{
+			echo json_encode(array("resp"=>false,"mensaje"=>"Su sesión se ha cerrado, Inicie sesión nuevamente"));
 		}
 	}
 	public function logout(){

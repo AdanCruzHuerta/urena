@@ -8,6 +8,7 @@ class Home extends CI_Controller {
 		$this->load->model('usuario_model');
 		$this->load->model('pagina_model');
 		$this->load->library('email');
+		$this->load->model('categorias_model');
 	}
 	public function index(){
 		$slider = $this->pagina_model->getSliderInicio();
@@ -19,7 +20,24 @@ class Home extends CI_Controller {
 		$this->load->view('home/template',$data);
 	}
 	public function productos() {
-		$data = array('contenido'=>'home/productos');
+		$categorias = $this->categorias_model->get_categorias(1);
+		#echo var_dump($categorias)."<hr><br>";
+		$array = array();
+		foreach ($categorias as $row) {
+			$subcategorias = $this->categorias_model->get_categorias($row->id);
+			$subarray = array();
+			foreach ($subcategorias as $sub) {
+				$subarray[] = array('id'=>$sub->id,'nombre'=>$sub->nombre);
+			}
+			$array[] = array('id'=>$row->id,'nombre'=>$row->nombre,
+							'subcategorias'=> $subarray);
+			#echo var_dump($subcategorias)."<hr><br>";
+		}
+		#echo '<pre>';
+		#print_r($array);
+		#echo "</pre>";
+		#die();
+		$data = array('contenido'=>'home/productos','categorias'=>$array);
 		$this->load->view('home/template',$data);
 	}
 	public function contacto() {
