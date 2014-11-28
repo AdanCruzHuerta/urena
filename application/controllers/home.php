@@ -89,5 +89,9 @@ class Home extends CI_Controller {
 				echo json_encode(array("resp"=>false));
 			}	
 		}
+	}
+	public function tienda(){
+		$data['contenido'] = 'home/tienda';
+		$this->load->view('home/template',$data);
 	}	
 }

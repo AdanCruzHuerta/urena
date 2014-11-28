@@ -51,7 +51,7 @@
 		<a href="<?php echo site_url("admon/alta_proveedor");?>" class="btn btn-primary pull-right">Agregar Nuevo</a>
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti in ad molestias error earum perspiciatis saepe ipsam ullam, soluta aperiam quo sed consequatur amet. Laboriosam ipsam facilis quo molestiae, expedita?
+		<p class="info_seccion">En esta sección se podrá  consultar, dar de alta, actualizar y dar de baja a los proveedores.</p>
 	</div>
 </div>
 <script type="text/javascript" src="js/dataTables.js"></script>

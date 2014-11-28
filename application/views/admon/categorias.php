@@ -27,7 +27,7 @@
 						</div>
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="javascript:;" data-id="<?php echo $categoria->id?>" data-accion="ver">Ver</a></li>
-							<li><a href="javascript:;" data-id="<?php echo $categoria->id?>" data-accion="renombrar">Renombrar</a></li>
+							<li><a href="javascript:;" data-id="<?php echo $categoria->id?>" data-nombre="<?php echo $categoria->nombre;?>" data-accion="renombrar">Renombrar</a></li>
 							<li><a href="javascript:;" data-id="<?php echo $categoria->id?>" data-accion="eliminar">Eliminar</a></li>
 						</ul>
 						</div>
@@ -42,7 +42,7 @@
 		</div>
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti in ad molestias error earum perspiciatis saepe ipsam ullam, soluta aperiam quo sed consequatur amet. Laboriosam ipsam facilis quo molestiae, expedita?
+		<p class="info_seccion">En esta sección podrá consultar, dar de alta, dar de baja y renombrar el nombre de las categorías. <br> Se podrán agregar dar de alta, dar de baja y actualizar artículos dentro de cada categoría creada.</p>
 	</div>
 </div>
 	
@@ -68,6 +68,34 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 					<button type="submit" class="btn btn-primary">Guardar</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="modal-renombrar">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title">Renombrar categoría</h4>
+			</div>
+			<form id="form-categoria_renombrar" action="<?php echo site_url('admon/categorias')?>" method="post">
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							<div class="form-group">
+								<label for="categoria" class="control-label">Nombre de categoría</label>
+								<input type="text" id="nombre_categoria" name="nombre_categoria" class="form-control"/>
+								<input type="hidden" id="id_categoria" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+					<button type="submit" class="btn btn-primary">Renombrar</button>
 				</div>
 			</form>
 		</div>
@@ -114,9 +142,43 @@
 							$('#mensaje').html('<div class="alert alert-success" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Exito!</strong>&nbsp;'+result.mensaje+'</div>');
 							var cadena = "";
 							for(var i = 0; i < result.categorias.length; i++){
-								cadena += '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4"><div class="categoria"><div  class="sticker" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-folder fa-fw"></i> '+result.categorias[i].nombre+'<span class="caret"></span></div><ul class="dropdown-menu" role="menu"><li><a href="javascript:;" data-id="'+result.categorias[i].id+'" data-accion="ver">Ver</a></li><li><a href="javascript:;" data-id="'+result.categorias[i].id+'" data-accion="renombrar">Renombrar</a></li><li><a href="javascript:;" data-id="'+result.categorias[i].id+'" data-accion="eliminar">Eliminar</a></li></ul></div></div>';
+								cadena += '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4"><div class="categoria"><div  class="sticker" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-folder fa-fw"></i> '+result.categorias[i].nombre+'<span class="caret"></span></div><ul class="dropdown-menu" role="menu"><li><a href="javascript:;" data-id="'+result.categorias[i].id+'" data-accion="ver">Ver</a></li><li><a href="javascript:;" data-id="'+result.categorias[i].id+'" data-accion="renombrar" data-nombre="'+result.categorias[i].nombre+'">Renombrar</a></li><li><a href="javascript:;" data-id="'+result.categorias[i].id+'" data-accion="eliminar">Eliminar</a></li></ul></div></div>';
 							}
 							$('#list-categorias').html(cadena);
+						}
+					}
+				});
+			}
+		});
+		var validacion = $('#form-categoria_renombrar').validate({
+			errorElement: "span",
+			errorClass: "help-block",
+			rules:{
+				nombre_categoria:{required:true, minlength:3}
+			},
+			highlight: function(element, error){
+				$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+			},
+			success: function(element){
+				$(element).closest('form-group').removeClass('has-error').addClass('has-success');
+			},
+			submitHandler: function(){
+				var id_categoria = $('#id_categoria').val();
+				var nombre = $('#nombre_categoria').val();
+				$.ajax({
+					type: "POST",
+					url: "<?php echo site_url('admon/categoria_renombrar')?>",
+					data:{id_categoria:id_categoria, nombre:nombre},
+					success:function(result){
+						var result = jQuery.parseJSON(result);
+						$("html, body").animate({scrollTop:"0px"});
+						$('#modal-renombrar').modal('hide');
+						$('#nombre_categoria').val("");
+						if(result.resp){
+							$('#nombre_categoria').val(result.nombre);
+							$('#mensaje').html('<div class="alert alert-success" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Exito!</strong>&nbsp;'+result.mensaje+'</div>');
+						}else{
+							$('#mensaje').html('<div class="alert alert-danger" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Error!</strong>&nbsp;'+result.mensaje+'</div>');
 						}
 					}
 				});
@@ -136,9 +198,6 @@
 					data:{id:id},
 					success: function(result){
 						var res = jQuery.parseJSON(result);
-						//alert(subnivel);
-						//var categorias = resp.mensaje.length;
-						//alert(res.resp);
 						if(res.resp == false){
 							$('#list-categorias').html(res.mensaje);
 						} else{
@@ -146,7 +205,7 @@
 								var cadena = "";
 								id_categoria_anterior = res[0].anterior;
 								for(var i = 0; i < res.length; i++){
-									cadena += '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4"><div class="categoria"><div  class="sticker" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-folder fa-fw"></i> '+res[i].nombre+'<span class="caret"></span></div><ul class="dropdown-menu" role="menu"><li><a href="javascript:;" data-id="'+res[i].id+'" data-accion="ver">Ver</a></li><li><a href="javascript:;" data-id="'+res[i].id+'" data-accion="renombrar">Renombrar</a></li><li><a href="javascript:;" data-id="'+res[i].id+'" data-accion="eliminar">Eliminar</a></li></ul></div></div>';
+									cadena += '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4"><div class="categoria"><div  class="sticker" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-folder fa-fw"></i> '+res[i].nombre+'<span class="caret"></span></div><ul class="dropdown-menu" role="menu"><li><a href="javascript:;" data-id="'+res[i].id+'" data-accion="ver">Ver</a></li><li><a href="javascript:;" data-id="'+res[i].id+'" data-nombre="'+res[i].nombre+'" data-accion="renombrar">Renombrar</a></li><li><a href="javascript:;" data-id="'+res[i].id+'" data-accion="eliminar">Eliminar</a></li></ul></div></div>';
 								}
 								$('#list-categorias').html(cadena);
 							}else{
@@ -156,6 +215,19 @@
 						}
 					}
 				});
+			}
+			else if(accion == 'renombrar'){
+				id_categoria = id;
+				if(subnivel >= 3){
+					$('#mensaje').append('<div class="alert alert-warning" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Error!</strong>&nbsp;No se puede agregar mas de 3 subcategorias</div>');
+				}else{
+					$('#id_categoria').val($(this).attr('data-id'));
+					$('#nombre_categoria').val($(this).attr('data-nombre'));
+					$('#modal-renombrar').modal('show');
+				}
+			}else if(accion == 'eliminar'){
+				id_categoria = id;
+
 			}
 		});
 		$('#regresarCategoria').click(function(){
@@ -184,7 +256,7 @@
 										var cadena = "";
 										id_categoria_anterior = cat[0].anterior;
 										for(var i = 0; i < cat.length; i++){
-											cadena += '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4"><div class="categoria"><div  class="sticker" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-folder fa-fw"></i> '+cat[i].nombre+'<span class="caret"></span></div><ul class="dropdown-menu" role="menu"><li><a href="javascript:;" data-id="'+cat[i].id+'" data-accion="ver">Ver</a></li><li><a href="javascript:;" data-id="'+cat[i].id+'" data-accion="renombrar">Renombrar</a></li><li><a href="javascript:;" data-id="'+cat[i].id+'" data-accion="eliminar">Eliminar</a></li></ul></div></div>';
+											cadena += '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4"><div class="categoria"><div  class="sticker" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-folder fa-fw"></i> '+cat[i].nombre+'<span class="caret"></span></div><ul class="dropdown-menu" role="menu"><li><a href="javascript:;" data-id="'+cat[i].id+'" data-accion="ver">Ver</a></li><li><a href="javascript:;" data-id="'+cat[i].id+'" data-accion="renombrar" data-nombre="'+cat[i].nombre+'">Renombrar</a></li><li><a href="javascript:;" data-id="'+cat[i].id+'" data-accion="eliminar">Eliminar</a></li></ul></div></div>';
 										}
 										$('#list-categorias').html(cadena);
 									}else{

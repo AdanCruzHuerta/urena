@@ -34,7 +34,7 @@
 		</div>
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti in ad molestias error earum perspiciatis saepe ipsam ullam, soluta aperiam quo sed consequatur amet. Laboriosam ipsam facilis quo molestiae, expedita?
+		<p class="info_seccion">En esta sección se podrá consultar a los clientes que se han registrado en el sitio.</p>
 	</div>
 </div>
 <script type="text/javascript" src="js/dataTables.js"></script>

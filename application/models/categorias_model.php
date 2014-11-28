@@ -24,10 +24,14 @@ class Categorias_model extends CI_Model{
 	public function anterior($id){
 		return $this->db->where('categorias_id1',$id)->get('categorias_has_categorias')->row();
 	}
-	/*
-	select c2.nombre	
-	from categorias as c join categorias_has_categorias as c_c on c.id = c_c.categorias_id 
-	join categorias as c2 on c_c.categorias_id1 = c2.id
-	where c_c.categorias_id = 1;
-	*/
+	public function categoria_renombrar($data_model){
+			   $this->db->set('nombre',$data_model['nombre'])
+						->where('id',$data_model['id'])
+						->update('categorias');
+		return $this->db->select('categorias.nombre as nombre')
+						->from('categorias')
+						->where('id',$data_model['id'])
+						->get()
+						->row();
+	}
 }

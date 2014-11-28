@@ -528,3 +528,7 @@ h2{color:#0b56a8;}
 .thumbnail{
   cursor: pointer;
 }
+
+.cantidad{
+  width: 60px;
+}

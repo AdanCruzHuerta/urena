@@ -51,7 +51,7 @@
 		<a href="<?php echo site_url("admon/alta_fletera");?>" class="btn btn-primary pull-right">Agregar Nuevo</a>
 	</div>
 	<div class="hidden-xs hidden-sm col-md-3 col-lg-3">
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur voluptates tenetur facere dolore numquam reiciendis, itaque labore sequi animi laboriosam, quisquam fugit sint dolores cupiditate minus quos dolorem iure fugiat.
+		<p class="info_seccion">En esta sección se podrá consultar, dar de alta, acualizar y dar de baja fleteras.</p>
 	</div>
 </div>
 <script type="text/javascript" src="js/datatables.js"></script>

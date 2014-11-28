@@ -52,10 +52,8 @@
 							<div class="accesos btn-group btn-group pull-right hidden-xs">
 								<button type="button" class="btn btn-link" data-toggle="modal" data-target="#modal-acceso">Acceso&nbsp;<i class="fa fa-sign-in fa-lg"></i></button>
 								<button type="button" class="btn btn-link" data-toggle="modal" data-target="#modal-registro">Registrate&nbsp;<i class="fa fa-edit fa-lg"></i></button>
-							</div>
-							<div class="carrito hidden-xs">
 								<button id="btn-carrito" type="button" class="btn btn-link" data-toggle="modal" data-target="#modal-carrito" >
-									$0.00 <i class="fa fa-shopping-cart"></i><!-- <kbd>0</kbd> -->
+									<i class="fa fa-shopping-cart"></i><!-- <kbd>0</kbd> -->
 								</button>
 							</div>
 						</div>
@@ -79,8 +77,8 @@
 								<li class="<?php if($contenido == 'home/contacto'){echo 'activo';} ?>">
 									<a href="<?php echo site_url('home/contacto'); ?>" class="btn_nav">Contacto</a>
 								</li>
-								<li class="<?php // if($contenido == 'home/inicio'){echo 'activo';} ?>">
-									<a id="btn_nav_m" href="#" class="btn_nav" data-toggle="modal" data-target="#miventana">Tienda en Linea</a>
+								<li class="<?php if($contenido == 'home/tienda'){echo 'activo';} ?>">
+									<a href="<?php echo site_url('home/tienda');?>" class="btn_nav">Tienda en Linea</a>
 								</li>
 							</ul>
 			          	</div>
@@ -252,8 +250,9 @@
 								<tr>
 									<th width="120px">Imagen</th>
 									<th>Producto</th>
+									<th>Cantidad</th>
 									<th>Precio</th>
-									<th>Acciones</th>
+									<th>Opciones</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -262,6 +261,7 @@
 										<img class="img-responsive" src="http://placehold.it/620x296/cccccc/ffffff">
 									</td>
 									<td>Nombre</td>
+									<td><input type="number" class="form-control cantidad" value="1" min="1" max="5"></td>
 									<td>$500.00</td>
 									<td>
 										<button type="button" class="btn btn-link">
@@ -274,6 +274,7 @@
 										<img class="img-responsive" src="http://placehold.it/620x296/cccccc/ffffff">
 									</td>
 									<td>Nombre</td>
+									<td><input type="number" class="form-control cantidad" value="1" min="1" max="5"></td>
 									<td>$500.00</td>
 									<td>
 										<button type="button" class="btn btn-link">
@@ -301,13 +302,13 @@
 					}, function() {
 						$( this ).removeClass( "animated pulse" );
 					}
-				);
-				$('#btn-carrito').tooltip({
+				);    
+				/*$('#btn-carrito').tooltip({
 					placement: 'left',
 					title: 'Productos',
 					trigger: 'hover',
 					viewport: {'selector':'#btn-carrito','left':'60px'}
-				});
+				});*/
 				var sideslider = $('[data-toggle=collapse-side]');
 				var sel = sideslider.attr('data-target');
 				var sel2 = sideslider.attr('data-target-2');

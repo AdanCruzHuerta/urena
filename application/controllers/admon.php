@@ -317,6 +317,20 @@ class Admon extends CI_Controller {
 			echo json_encode(array("resp"=>false,"mensaje"=>"Su sesión se ha cerrado, Inicie sesión nuevamente"));
 		}
 	}
+	public function categoria_renombrar(){
+		if($this->session->userdata('nombre')){
+			if($this->input->post()){
+				$data_model['id'] = $this->input->post('id_categoria');
+				$data_model['nombre'] = $this->input->post('nombre');
+				$nombre = $this->categorias_model->categoria_renombrar($data_model);
+				echo json_encode(array("resp"=>true,"mensaje"=>"El nombre ha sido cambiado","nombre"=>$nombre));
+			}else{
+				echo json_encode(array("resp" => false, "mensaje" => "Error al modificar el nombre de la categoria"));
+			}
+		}else{
+			echo json_encode(array("resp"=>false,"mensaje"=>"Su sesión se ha cerrado, Inicie sesión nuevamente"));
+		}
+	}
 	public function logout(){
 		$this->session->sess_destroy();
 		redirect('admon');

@@ -409,3 +409,9 @@ table.dataTable thead .sorting:after {
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
 }
+
+.info_seccion{
+    font-weight: bold;
+    text-align: justify;
+    font-size: 15px;   
+}
