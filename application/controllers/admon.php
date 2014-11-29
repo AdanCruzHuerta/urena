@@ -11,6 +11,7 @@ class Admon extends CI_Controller {
 		$this->load->model('fleteras_model');
 		$this->load->model('pagina_model');
 		$this->load->model('categorias_model');
+		$this->load->model('articulos_model');
 	}
 	public function index(){
 		$this->load->view('admon/login');
@@ -326,6 +327,28 @@ class Admon extends CI_Controller {
 				echo json_encode(array("resp"=>true,"mensaje"=>"El nombre ha sido cambiado","nombre"=>$nombre));
 			}else{
 				echo json_encode(array("resp" => false, "mensaje" => "Error al modificar el nombre de la categoria"));
+			}
+		}else{
+			echo json_encode(array("resp"=>false,"mensaje"=>"Su sesión se ha cerrado, Inicie sesión nuevamente"));
+		}
+	}
+	public function agregarArticulo(){
+		if($this->session->userdata('nombre')){
+			#die(var_dump($_FILES));
+			if(isset($_FILES)){
+				$file_element_name = 'userfile';
+				$articulo = $this->articulos_model->addArticulo($this->input->get('nombre'),$this->input->get('descripcion'),$this->input->get('alto'),$this->input->get('largo'),$this->input->get('ancho'),$this->input->get('proveedor'),$this->input->get('precio'));
+				#die(var_dump($articulo));
+				$ext = explode('/',$_FILES[0]['type']);
+				if(copy($_FILES[0]['tmp_name'], "articulos/".$articulo.".".$ext[1])){
+					$this->articulos_model->articuloCategoria($this->input->get('id_categoria'),$articulo);
+					$this->articulos_model->insertImg($articulo,"articulos/".$articulo.".".$ext[1]);
+					echo json_encode(array("resp"=>true,"mensaje"=>"El articulo se guardo correctamente"));
+				}else{
+					echo json_encode(array("resp"=>false,"mensaje"=>"Error al guardar la imagen"));
+				}
+			}else{
+				echo json_encode(array("resp"=>false,"mensaje"=>"Error al enviar la informacion"));
 			}
 		}else{
 			echo json_encode(array("resp"=>false,"mensaje"=>"Su sesión se ha cerrado, Inicie sesión nuevamente"));
