@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="css/dataTables.bootstrap.css">
+<link rel="stylesheet" type="text/css" href="css/fileinput.min.css">
 <div class="row">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<h2><i class="fa fa-tag"></i> Categorías</h2>
@@ -189,11 +189,23 @@
 </div>
 <script type="text/javascript" src="js/validate.js"></script>
 <script type="text/javascript" src="js/messages_es.js"></script>
+<script type="text/javascript" src="js/fileinput.min.js"></script>
 <script>
 	$(document).ready(function(){
 		var id_categoria = 1;
 		var id_categoria_anterior = 1;
 		var subnivel = 0;
+		$("#imagen").fileinput({
+			browseClass: 'btn btn-primary btn-block',
+			browseLabel: ' Seleccionar Imagen',
+			browseIcon: '<i class="fa fa-picture-o"></i>',
+			initialPreview: '<img src="/urena/media/imagenes/producto1.jpg" class="file-preview-image">',
+			allowedFileExtensions: ["jpg", "png"],
+			allowedFileTypes: ["image"],
+			showCaption: false,
+			showRemove: false,
+			showUpload: false
+		});
 		$('#addCategoria').click(function(){
 			if(subnivel >= 3){
 				$('#mensaje').append('<div class="alert alert-warning" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Error!</strong>&nbsp;No se puede agregar mas de 3 subcategorias</div>');
@@ -208,7 +220,7 @@
 				$('#modal-articulo').modal('show');
 			}
 		});
-		var validacion = $('#form-categoria').validate({
+		var nuevaCategoria = $('#form-categoria').validate({
 			errorElement: "span",
 			errorClass:"help-block",
 			rules:{
@@ -233,11 +245,7 @@
 						$('#categoria').val("");
 						if(result.resp){
 							$('#mensaje').html('<div class="alert alert-success" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Exito!</strong>&nbsp;'+result.mensaje+'</div>');
-							var cadena = "";
-							for(var i = 0; i < result.categorias.length; i++){
-								cadena += '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4"><div class="categoria"><div  class="sticker" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-folder fa-fw"></i> '+result.categorias[i].nombre+'<span class="caret"></span></div><ul class="dropdown-menu" role="menu"><li><a href="javascript:;" data-id="'+result.categorias[i].id+'" data-accion="ver">Ver</a></li><li><a href="javascript:;" data-id="'+result.categorias[i].id+'" data-accion="renombrar" data-nombre="'+result.categorias[i].nombre+'">Renombrar</a></li><li><a href="javascript:;" data-id="'+result.categorias[i].id+'" data-accion="eliminar">Eliminar</a></li></ul></div></div>';
-							}
-							$('#list-categorias').html(cadena);
+							$.categoriasYarticulos();
 						}
 					}
 				});
@@ -270,6 +278,7 @@
 						if(result.resp){
 							//$('#nombre_categoria').val(result.nombre);
 							$('#mensaje').html('<div class="alert alert-success" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Exito!</strong>&nbsp;'+result.mensaje+'</div>');
+							$.categoriasYarticulos();
 						}else{
 							$('#mensaje').html('<div class="alert alert-danger" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Error!</strong>&nbsp;'+result.mensaje+'</div>');
 						}
@@ -315,6 +324,7 @@
 						var res = jQuery.parseJSON(result);
 						if(res.resp){
 							$('#mensaje').html('<div class="alert alert-success" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Exito!</strong>&nbsp;'+res.mensaje+'</div>');
+							$.categoriasYarticulos();
 						}else{
 							$('#mensaje').html('<div class="alert alert-danger" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Error!</strong>&nbsp;'+res.mensaje+'</div>');
 						}
@@ -337,46 +347,18 @@
 				//id_categoria_anterior = id_categoria;
 				subnivel++;
 				id_categoria = id;
-				$.ajax({
-					type: "POST",
-					url: "<?php echo site_url('admon/subcategorias')?>",
-					data:{id:id},
-					success: function(result){
-						var res = jQuery.parseJSON(result);
-						if(res.resp == false){
-							$('#list-categorias').html(res.mensaje);
-						} else{
-							if(res.length > 0){
-								var cadena = "";
-								id_categoria_anterior = res[0].anterior;
-								for(var i = 0; i < res.length; i++){
-									cadena += '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4"><div class="categoria"><div  class="sticker" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-folder fa-fw"></i> '+res[i].nombre+'<span class="caret"></span></div><ul class="dropdown-menu" role="menu"><li><a href="javascript:;" data-id="'+res[i].id+'" data-accion="ver">Ver</a></li><li><a href="javascript:;" data-id="'+res[i].id+'" data-nombre="'+res[i].nombre+'" data-accion="renombrar">Renombrar</a></li><li><a href="javascript:;" data-id="'+res[i].id+'" data-accion="eliminar">Eliminar</a></li></ul></div></div>';
-								}
-								$('#list-categorias').html(cadena);
-							}else{
-								$('#mensaje').html('<div class="alert alert-info" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Error!</strong>&nbsp;Actualmente no cuenta con categorías</div>');
-								$('#list-categorias').html('');
-							}
-						}
-					}
-				});
+				$.categoriasYarticulos();
 			}
 			else if(accion == 'renombrar'){
-				id_categoria = id;
-				if(subnivel >= 3){
-					$('#mensaje').append('<div class="alert alert-warning" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Error!</strong>&nbsp;No se puede agregar mas de 3 subcategorias</div>');
-				}else{
-					$('#id_categoria').val($(this).attr('data-id'));
-					$('#nombre_categoria').val($(this).attr('data-nombre'));
-					$('#modal-renombrar').modal('show');
-				}
+				$('#id_categoria').val($(this).attr('data-id'));
+				$('#nombre_categoria').val($(this).attr('data-nombre'));
+				$('#modal-renombrar').modal('show');
 			}else if(accion == 'eliminar'){
 				id_categoria = id;
 
 			}
 		});
 		$('#regresarCategoria').click(function(){
-			//id_categoria = id_categoria_anterior;
 			if(id_categoria == 1){
 				$('#mensaje').html('<div class="alert alert-info" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Error!</strong>&nbsp;Ya se encuentra en la raiz</div>');
 			}else{
@@ -388,31 +370,53 @@
 					success: function(result){
 						var res = jQuery.parseJSON(result);
 						id_categoria = res;
-						$.ajax({
-							type: "POST",
-							url: "<?php echo site_url('admon/subcategorias')?>",
-							data:{id:id_categoria},
-							success: function(categorias){
-								var cat = jQuery.parseJSON(categorias);
-								if(cat.resp == false){
-									$('#list-categorias').html(cat.mensaje);
-								} else{
-									if(cat.length > 0){
-										var cadena = "";
-										id_categoria_anterior = cat[0].anterior;
-										for(var i = 0; i < cat.length; i++){
-											cadena += '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4"><div class="categoria"><div  class="sticker" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-folder fa-fw"></i> '+cat[i].nombre+'<span class="caret"></span></div><ul class="dropdown-menu" role="menu"><li><a href="javascript:;" data-id="'+cat[i].id+'" data-accion="ver">Ver</a></li><li><a href="javascript:;" data-id="'+cat[i].id+'" data-accion="renombrar" data-nombre="'+cat[i].nombre+'">Renombrar</a></li><li><a href="javascript:;" data-id="'+cat[i].id+'" data-accion="eliminar">Eliminar</a></li></ul></div></div>';
-										}
-										$('#list-categorias').html(cadena);
-									}else{
-										$('#list-categorias').html('<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><div class="cat-vacio"><label>Actualmente no cuenta con categorías</label></div></div>');
-									}
-								}
-							}
-						});
+						$.categoriasYarticulos();
 					}
 				});
 			}
 		});
+		$.categoriasYarticulos = function(){
+			//$('#mensaje').html('');
+			$.ajax({
+				type: "POST",
+				url: "<?php echo site_url('admon/subcategorias')?>",
+				data:{id:id_categoria},
+				success: function(respuesta){
+					var datos = jQuery.parseJSON(respuesta);
+					var categorias = datos.categorias;
+					var articulos = datos.articulos;
+					var vandera = false;
+					if(datos.resp == false){
+						$('#list-categorias').html(datos.mensaje);
+					} else{
+						if(categorias.length > 0){
+							var cadena = "";
+							id_categoria_anterior = categorias[0].anterior;
+							for(var i = 0; i < categorias.length; i++){
+								cadena += '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4"><div class="categoria"><div  class="sticker" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-folder fa-fw"></i> '+categorias[i].nombre+'<span class="caret"></span></div><ul class="dropdown-menu" role="menu"><li><a href="javascript:;" data-id="'+categorias[i].id+'" data-accion="ver">Ver</a></li><li><a href="javascript:;" data-id="'+categorias[i].id+'" data-accion="renombrar" data-nombre="'+categorias[i].nombre+'">Renombrar</a></li><li><a href="javascript:;" data-id="'+categorias[i].id+'" data-accion="eliminar">Eliminar</a></li></ul></div></div>';
+							}
+							$('#list-categorias').html(cadena);
+							vandera = true;
+						}
+						if(articulos.length > 0){
+							if(vandera == false){
+								$('#list-categorias').html('');
+							}
+							var cadena = "";
+							id_categoria_anterior = articulos[0].anterior;
+							for(var i = 0; i < articulos.length; i++){
+								cadena += '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4"><div class="categoria"><div class="sticker" aria-expanded="false"><i class="fa fa-tag fa-fw"></i> '+articulos[i].nombre+'</div></div></div>';
+							}
+							$('#list-categorias').append(cadena);
+							vandera = true;
+						}
+						if(vandera == false){
+							$('#mensaje').html('<div class="alert alert-info" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Error!</strong>&nbsp;Actualmente no cuenta con categorías ni articulos</div>');
+							$('#list-categorias').html('');
+						}
+					}
+				}
+			});
+		}
 	});
 </script>	

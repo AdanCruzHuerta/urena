@@ -273,7 +273,6 @@ class Admon extends CI_Controller {
 				$data_model2['categorias_id1'] = $categorias_id1;
 				$this->categorias_model->add_categorias_categorias($data_model2);
 				$data['resp'] = true;
-				$data['categorias'] = $this->categorias_model->get_categorias($data_model2['categorias_id']);
 				$data['mensaje'] = "La categoria ha sido creada";
 				echo json_encode($data);
 			}else{
@@ -293,11 +292,16 @@ class Admon extends CI_Controller {
 			redirect('admon');
 		}
 	}
+	protected function categoriasYarticulos($id){
+		$data['categorias'] = $this->categorias_model->get_categorias($id);
+		$data['articulos'] = $this->articulos_model->getArticulos($id);
+		return $data;
+	}
 	public function subcategorias(){
 		if($this->session->userdata('nombre')){
 			if($this->input->post()){
-				$subcategorias = $this->categorias_model->get_categorias($this->input->post('id'));
-				echo json_encode($subcategorias);
+				$data = $this->categoriasYarticulos($this->input->post('id'));
+				echo json_encode($data);
 				#echo json_encode(array("resp"=>true,"mensaje"=>$subcategorias));
 			}else{
 				echo json_encode(array("resp"=>false,"mensaje"=>"Error al consultar categoria"));

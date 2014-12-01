@@ -13,4 +13,13 @@ class Articulos_model extends CI_Model{
 	public function insertImg($id,$ruta){
 		$this->db->set('ruta_imagen',$ruta)->where('id',$id)->update('articulos');
 	}
+	public function getArticulos($id){
+		return $this->db->select('a.id as id')
+						->select('a.nombre as nombre')
+						->from('articulos as a')
+						->join('categorias_has_articulos as c_a ','a.id = c_a.articulos_id')
+						->where('c_a.categorias_id',$id)
+						->get()
+						->result();
+	}
 }
