@@ -360,7 +360,7 @@ table.dataTable thead .sorting:after {
         display: none;
     }
 }
-.categoria{
+.categoria, .articulo{
     position: relative;
     width: 100%;
     margin-bottom: 20px;
@@ -409,9 +409,17 @@ table.dataTable thead .sorting:after {
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
 }
-
 .info_seccion{
     font-weight: bold;
     text-align: justify;
     font-size: 15px;   
+}
+.input-readonly{
+    border: none;
+    box-shadow: none;
+    pointer-events: none;
+}
+.form-control.input-readonly:focus{
+    border: none;
+    box-shadow: none;
 }

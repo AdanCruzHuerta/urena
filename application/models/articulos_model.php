@@ -22,4 +22,17 @@ class Articulos_model extends CI_Model{
 						->get()
 						->result();
 	}
+	public function getArticulo($id){
+		return $this->db->where('id',$id)->get('articulos')->row();
+	}
+	public function getArticulosHome($id){
+		return $this->db->select('a.id as id')
+						->select('a.nombre as nombre')
+						->select('a.ruta_imagen as imagen')
+						->from('articulos as a')
+						->join('categorias_has_articulos as c_a ','a.id = c_a.articulos_id')
+						->where('c_a.categorias_id',$id)
+						->get()
+						->result();
+	}
 }

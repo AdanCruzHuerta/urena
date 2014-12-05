@@ -358,6 +358,32 @@ class Admon extends CI_Controller {
 			echo json_encode(array("resp"=>false,"mensaje"=>"Su sesión se ha cerrado, Inicie sesión nuevamente"));
 		}
 	}
+	public function datosArticulo(){
+		if ($this->session->userdata('nombre')) {
+			if ($this->input->post()) {
+				$articulo = $this->articulos_model->getArticulo($this->input->post('id'));
+				echo json_encode(array("resp"=>true,"articulo"=>$articulo));
+			} else {
+				echo json_encode(array("resp"=>false,"mensaje"=>"Error al consultar la informacion"));
+			}
+		} else {
+			echo json_encode(array("resp"=>false,"mensaje"=>"Su sesión se ha cerrado, Inicie sesión nuevamente"));
+		}
+		
+	}
+	public function editarArticulo(){
+		if ($this->session->userdata('nombre')) {
+			if ($this->input->post()) {
+				$articulo = $this->articulos_model->getArticulo($this->input->post('id'));
+				echo json_encode(array("resp"=>true,"articulo"=>$articulo));
+			} else {
+				echo json_encode(array("resp"=>false,"mensaje"=>"Error al enviar la informacion"));
+			}
+		} else {
+			echo json_encode(array("resp"=>false,"mensaje"=>"Su sesión se ha cerrado, Inicie sesión nuevamente"));
+		}
+		
+	}
 	public function logout(){
 		$this->session->sess_destroy();
 		redirect('admon');

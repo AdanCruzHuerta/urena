@@ -18,17 +18,30 @@
 					<?php for($i=0; $i < count($categorias); $i++){
 							if(count($categorias[$i]['subcategorias']) > 0){?>
 							<li>
-								<a href="#"><?php echo $categorias[$i]['nombre']; ?><span class="fa arrow"></span></a>
+								<a href="javascript:;" data-id="<?php echo $categorias[$i]['id']; ?>"><?php echo $categorias[$i]['nombre']; ?><span class="fa arrow"></span></a>
 								<ul class="nav nav-second-level">
 								<?php for($j=0; $j < count($categorias[$i]['subcategorias']); $j++){?>
-								<li>
-									<a href="flot.html"><?php echo $categorias[$i]['subcategorias'][$j]['nombre']?></a>
-								</li>
+									<?php if(count($categorias[$i]['subcategorias'][$j]['subcategorias']) > 0){ ?>
+										<li>
+										<a href="javascript:;" data-id="<?php echo $categorias[$i]['subcategorias'][$j]['id']?>"><?php echo $categorias[$i]['subcategorias'][$j]['nombre']?><span class="fa arrow"></span></a>
+		                                <ul class="nav nav-third-level">
+		                                <?php for($k=0; $k < count($categorias[$i]['subcategorias'][$j]['subcategorias']); $k++){?>
+		                                    <li>
+		                                        <a href="javascript:;" data-id="<?php echo $categorias[$i]['subcategorias'][$j]['subcategorias'][$k]['id']?>"><?php echo $categorias[$i]['subcategorias'][$j]['subcategorias'][$k]['nombre']?></a>
+		                                    </li>
+		                                <?php } ?>
+		                                </ul>
+		                                </li>
+									<?php }else{?>
+										<li>
+											<a href="javascript:;" data-id="<?php echo $categorias[$i]['subcategorias'][$j]['id']?>"><?php echo $categorias[$i]['subcategorias'][$j]['nombre']?></a>
+										</li>
+									<?php }?>
 								<?php }?>
 								</ul>
 							<?php }else{ ?>
 							<li>
-								<a href=""><?php echo $categorias[$i]['nombre']; ?></a>
+								<a href="javascript:;" data-id="<?php echo $categorias[$i]['id']; ?>"><?php echo $categorias[$i]['nombre']; ?></a>
 							</li>
 					<?php }} ?>
                     <!-- <li>
@@ -91,134 +104,110 @@
 					<li><a href="#">Contemporaneo</a></li>
 					<li class="active">Recamaras</li>
 				</ol>
-				<div class="row">
-					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+				<div class="row" id="listProductos">
+					<!-- <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
 						<div class="thumbnail">
 							<img src="media/imagenes/producto1.jpg" alt="" class="img-rounded">
 							<div class="caption">
 								<h4>Producto 1</h4>
 							</div>
 						</div>
-					</div>
-					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-						<div class="thumbnail">
-							<img src="media/imagenes/producto2.jpg" alt="" class="img-rounded">
-							<div class="caption">
-								<h4>Producto 2</h4>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-						<div class="thumbnail">
-							<img src="media/imagenes/producto3.jpg" alt="" class="img-rounded">
-							<div class="caption">
-								<h4>Producto 3</h4>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-						<div class="thumbnail">
-							<img src="media/imagenes/producto4.jpg" alt="" class="img-rounded">
-							<div class="caption">
-								<h4>Producto 4</h4>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-						<div class="thumbnail">
-							<img src="media/imagenes/producto1.jpg" alt="" class="img-rounded">
-							<div class="caption">
-								<h4>Producto 5</h4>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-						<div class="thumbnail">
-							<img src="media/imagenes/producto2.jpg" alt="" class="img-rounded">
-							<div class="caption">
-								<h4>Producto 6</h4>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-						<div class="thumbnail">
-							<img src="media/imagenes/producto3.jpg" alt="" class="img-rounded">
-							<div class="caption">
-								<h4>Producto 7</h4>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-						<div class="thumbnail">
-							<img src="media/imagenes/producto4.jpg" alt="" class="img-rounded">
-							<div class="caption">
-								<h4>Producto 8</h4>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-						<div class="thumbnail">
-							<img src="media/imagenes/producto1.jpg" alt="" class="img-rounded">
-							<div class="caption">
-								<h4>Producto 9</h4>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-						<div class="thumbnail">
-							<img src="media/imagenes/producto2.jpg" alt="" class="img-rounded">
-							<div class="caption">
-								<h4>Producto 10</h4>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-						<div class="thumbnail">
-							<img src="media/imagenes/producto3.jpg" alt="" class="img-rounded">
-							<div class="caption">
-								<h4>Producto 11</h4>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-						<div class="thumbnail">
-							<img src="media/imagenes/producto4.jpg" alt="" class="img-rounded">
-							<div class="caption">
-								<h4>Producto 12</h4>
-							</div>
-						</div>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modal-producto">Modal</button> -->
 </section>
 <br>
 <br>
 <div class="modal fade" id="modal-producto">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-				<h4 class="modal-title">Modal title</h4>
+				<h4 class="modal-title" id="verNombre"></h4>
 			</div>
-			<div class="modal-body">
-				<center>
-					<i class="fa fa-spinner fa-spin fa-5x"></i>
-				</center>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
-			</div>
+			<form id="form-verArticulo" enctype="multipart/form-data">
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-6">
+							<img src="" class="img-responsive img-thumbnail" id="imagen">
+						</div>
+						<div class="col-md-6">
+							<table class="table table-user-information">
+								<tbody>
+									<tr>
+										<td>Descripcion:</td>
+										<td id="verDescripcion"></td>
+									</tr>
+									<tr>
+										<td>Alto:</td>
+										<td id="verAlto"></td>
+									</tr>
+									<tr>
+										<td>Largo:</td>
+										<td id="verLargo"></td>
+									</tr>
+									<tr>
+										<td>Ancho:</td>
+										<td id="verAncho"></td>
+									</tr>
+									<tr>
+										<td>Precio:</td>
+										<td id="verPrecio"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-warning" id="btn-guardarCambios">Añadir al Carrito</button>
+					<button type="submit" class="btn btn-primary" id="btn-guardarCambios">Comprar</button>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>
 <script>
 	$(document).ready(function(){
-		$('.thumbnail').click(function(){
-			$('#modal-producto').modal('show');
+		$('#side-menu').find('a').click(function(){
+			$.ajax({
+				type: "POST",
+				url: "<?php echo site_url('home/getProductos')?>",
+				data:{id:$(this).attr('data-id')},
+				success: function(result){
+					var res = jQuery.parseJSON(result);
+					if(res.length > 0){
+						var cadena = "";
+						for(var i = 0; i < res.length; i++){
+							cadena += '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><div class="thumbnail" data-id="'+res[i].id+'"><img src="'+res[i].imagen+'" alt="" class="img-rounded"><div class="caption"><h4>'+res[i].nombre+'</h4></div></div></div>';
+						}
+						$('#listProductos').html(cadena);
+					}else{
+						$('#listProductos').html('<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><div class="alert alert-info" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Error!</strong>&nbsp;Actualmente no cuenta con articulos esta categoria</div></div>');
+					}
+				}
+			});
+		});
+		$('#listProductos').on('click','.thumbnail',function(){
+			$.ajax({
+				type: "POST",
+				url: "<?php echo site_url('home/datosArticulo')?>",
+				data:{id:$(this).attr('data-id')},
+				success: function(result){
+					var res = jQuery.parseJSON(result);
+					var articulo = res.articulo;
+					$('#imagen').attr('src','<?php echo base_url(); ?>'+articulo.ruta_imagen);
+					$('#verNombre').html(articulo.nombre);
+					$('#verDescripcion').html(articulo.descripcion);
+					$('#verAlto').html(articulo.alto);
+					$('#verLargo').html(articulo.largo);
+					$('#verAncho').html(articulo.ancho);
+					$('#verPrecio').html(articulo.precio);
+					$('#modal-producto').modal('show');
+				}
+			});
 		});
 		$(function() {
 			$('#side-menu').metisMenu();

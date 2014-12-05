@@ -9,6 +9,7 @@ class Home extends CI_Controller {
 		$this->load->model('pagina_model');
 		$this->load->library('email');
 		$this->load->model('categorias_model');
+		$this->load->model('articulos_model');
 	}
 	public function index(){
 		$slider = $this->pagina_model->getSliderInicio();
@@ -21,24 +22,77 @@ class Home extends CI_Controller {
 	}
 	public function productos() {
 		$categorias = $this->categorias_model->get_categorias(1);
-		#echo var_dump($categorias)."<hr><br>";
 		$array = array();
 		foreach ($categorias as $row) {
 			$subcategorias = $this->categorias_model->get_categorias($row->id);
 			$subarray = array();
 			foreach ($subcategorias as $sub) {
-				$subarray[] = array('id'=>$sub->id,'nombre'=>$sub->nombre);
+				$subcategorias3 = $this->categorias_model->get_categorias($sub->id);
+				$subarray3 = array();
+				foreach ($subcategorias3 as $sub3) {
+					$subarray3[] = array('id'=>$sub3->id,'nombre'=>$sub3->nombre);
+				}
+				$subarray[] = array('id'=>$sub->id,'nombre'=>$sub->nombre,'subcategorias'=>$subarray3);
 			}
 			$array[] = array('id'=>$row->id,'nombre'=>$row->nombre,
 							'subcategorias'=> $subarray);
-			#echo var_dump($subcategorias)."<hr><br>";
 		}
-		#echo '<pre>';
-		#print_r($array);
-		#echo "</pre>";
-		#die();
 		$data = array('contenido'=>'home/productos','categorias'=>$array);
 		$this->load->view('home/template',$data);
+	}
+	public function getProductos(){
+		if ($this->input->post()) {
+			$subcategorias1 = $this->categorias_model->getSubcategorias($this->input->post('id'));
+			#echo print_r($subcategorias1);
+			$productos = array();
+			if(count($subcategorias1) > 0){
+
+				foreach($subcategorias1 as $sub1){
+					
+					$articulos1 = $this->articulos_model->getArticulosHome($sub1->categorias_id1);
+					if(count($articulos1) > 0){
+						foreach ($articulos1 as $art1) {
+							$productos[] = array('id' => $art1->id, 'nombre' => $art1->nombre, 'imagen' => $art1->imagen);
+						}
+					}
+
+					$subcategorias2 = $this->categorias_model->getSubcategorias($sub1->categorias_id1);
+					if(count($subcategorias2) > 0){
+						foreach ($subcategorias2 as $sub2) {
+							$articulos2 = $this->articulos_model->getArticulosHome($sub2->categorias_id1);
+							if(count($articulos2) > 0){
+								foreach ($articulos2 as $art2) {
+									$productos[] = array('id' => $art2->id, 'nombre' => $art2->nombre, 'imagen' => $art2->imagen);
+								}
+							}
+						}
+					}
+					#die(print_r($subcategorias2));
+					
+					
+				}
+			} else{
+				$articulos1 = $this->articulos_model->getArticulosHome($this->input->post('id'));
+					if(count($articulos1) > 0){
+						foreach ($articulos1 as $art1) {
+							$productos[] = array('id' => $art1->id, 'nombre' => $art1->nombre, 'imagen' => $art1->imagen);
+						}
+					}
+			}
+			#echo print_r($productos);
+			
+			echo json_encode($productos);
+		} else {
+			echo json_encode(false);
+		}
+	}
+	public function datosArticulo(){
+		if ($this->input->post()) {
+			$articulo = $this->articulos_model->getArticulo($this->input->post('id'));
+			echo json_encode(array("resp"=>true,"articulo"=>$articulo));
+		} else {
+			echo json_encode(array("resp"=>false,"mensaje"=>"Error al consultar la informacion"));
+		}
 	}
 	public function contacto() {
 		$data = array('contenido'=>'home/contacto');

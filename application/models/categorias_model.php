@@ -34,4 +34,7 @@ class Categorias_model extends CI_Model{
 						->get()
 						->row();
 	}
+	public function getSubcategorias($id){
+		return $this->db->where('categorias_id',$id)->get('categorias_has_categorias')->result();
+	}
 }

@@ -187,6 +187,92 @@
 		</div>
 	</div>
 </div>
+<div class="modal fade" id="modal-verArticulo">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title">Articulo</h4>
+			</div>
+			<form id="form-verArticulo" enctype="multipart/form-data">
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-4">
+							<input type="file" id="verImagen" name="verImagen">
+						</div>
+						<div class="col-md-8">
+							<div class="form-horizontal">
+								<div class="form-group">
+									<label for="" class="col-sm-2 control-label">Nombre</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control input-readonly" id="verNombre" name="verNombre">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="" class="col-sm-2 control-label">Descripcion</label>
+									<div class="col-sm-10">
+										<textarea class="form-control input-readonly" id="verDescripcion" name="verDescripcion"></textarea>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="" class="col-sm-6 control-label">Alto</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control input-readonly" id="verAlto" name="verAlto">
+											</div>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="" class="col-sm-6 control-label">Largo</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control input-readonly" id="verLargo" name="verLargo">
+											</div>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="" class="col-sm-6 control-label">Ancho</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control input-readonly" id="verAncho" name="verAncho">
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-8">
+										<div class="form-group">
+											<label for="" class="col-sm-3 control-label">Proveedor</label>
+											<div class="col-sm-9">
+												<select class="form-control input-readonly" id="verProveedor" name="verProveedor">
+													<option value="1">Selecciona un proveedor</option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="" class="col-sm-6 control-label">Precio</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control input-readonly" id="verPrecio" name="verPrecio">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger">Eliminar</button>
+					<button type="button" class="btn btn-warning" id="editarArticulo">Editar</button>
+					<button type="submit" class="btn btn-primary" id="btn-guardarCambios" disabled>Guardar</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
 <script type="text/javascript" src="js/validate.js"></script>
 <script type="text/javascript" src="js/messages_es.js"></script>
 <script type="text/javascript" src="js/fileinput.min.js"></script>
@@ -195,7 +281,9 @@
 		var id_categoria = 1;
 		var id_categoria_anterior = 1;
 		var subnivel = 0;
-		$("#imagen").fileinput({
+		var id_articulo = 0;
+		var categoriasOarticulos = 0;
+		$("input[type=file]").fileinput({
 			browseClass: 'btn btn-primary btn-block',
 			browseLabel: ' Seleccionar Imagen',
 			browseIcon: '<i class="fa fa-picture-o"></i>',
@@ -209,6 +297,8 @@
 		$('#addCategoria').click(function(){
 			if(subnivel >= 3){
 				$('#mensaje').append('<div class="alert alert-warning" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Error!</strong>&nbsp;No se puede agregar mas de 3 subcategorias</div>');
+			}else if(categoriasOarticulos == 1){
+				$('#mensaje').append('<div class="alert alert-warning" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Error!</strong>&nbsp;No se puede agregar subcategorias si hay productos</div>');
 			}else{
 				$('#modal-categoria').modal('show');
 			}
@@ -216,6 +306,8 @@
 		$('#addArticulo').click(function(){
 			if(id_categoria == 1){
 				$('#mensaje').append('<div class="alert alert-warning" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Error!</strong>&nbsp;No se puede agregar articulos en la raiz</div>');
+			}else if(categoriasOarticulos == 0){
+				$('#mensaje').append('<div class="alert alert-warning" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Error!</strong>&nbsp;No se puede agregar articulos si hay subcategorias</div>');
 			}else{
 				$('#modal-articulo').modal('show');
 			}
@@ -336,6 +428,55 @@
 				});
 			}
 		});
+		var editarArticulo = $('#form-verArticulo').validate({
+			errorElement: "span",
+			errorClass:"help-block",
+			rules:{
+				verImagen:{required:true},
+				verNombre:{required:true, minlength:3},
+				verDescripcion:{required:true, minlength:3},
+				verAlto:{required:true, number:true},
+				verLargo:{required:true, number:true},
+				verAncho:{required:true, number:true},
+				verProveedor:{required:true,},
+				verPrecio:{required:true, minlength:3}
+			},
+			highlight: function(element, error){
+				$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+			},
+			success: function(element){
+				$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+			},
+			submitHandler: function(){
+				var formulario = $('#form-verArticulo').serialize();
+				var data = new FormData();
+				$.each(files, function(key, value)
+				{
+					data.append(key, value);
+				});
+				$.ajax({
+					type: "POST",
+					url: "<?php echo site_url('admon/editarArticulo'); ?>?id_articulo="+id_articulo+"&"+formulario,
+					cache: false,
+					processData: false,
+					contentType: false,
+					data: data,
+					success: function(result){
+						var res = jQuery.parseJSON(result);
+						if(res.resp){
+							$('#mensaje').html('<div class="alert alert-success" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Exito!</strong>&nbsp;'+res.mensaje+'</div>');
+							$.categoriasYarticulos();
+						}else{
+							$('#mensaje').html('<div class="alert alert-danger" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Error!</strong>&nbsp;'+res.mensaje+'</div>');
+						}
+						$('#modal-verArticulo').modal('hide');
+						$('#form-verArticulo').each(function(){
+							this.reset();
+						});
+					}
+				});
+			}
+		});
 		$(document).on('change','#imagen',function(e){
 			files = e.target.files;
 		});
@@ -357,6 +498,51 @@
 				id_categoria = id;
 
 			}
+		});
+		$('#list-categorias').on('click','.articulo',function(){
+			id_articulo = $(this).attr('data-id');
+			$.ajax({
+				type: "POST",
+				url: "<?php echo site_url('admon/datosArticulo')?>",
+				data:{id:id_articulo},
+				success: function(result){
+					var res = jQuery.parseJSON(result);
+					var articulo = res.articulo;
+					$('#form-verArticulo').find('img').attr('src','<?php echo base_url(); ?>'+articulo.ruta_imagen)
+					$('#verNombre').val(articulo.nombre);
+					$('#verDescripcion').val(articulo.descripcion);
+					$('#verAlto').val(articulo.alto);
+					$('#verLargo').val(articulo.largo);
+					$('#verAncho').val(articulo.ancho);
+					$('#verProveedor option['+articulo.proveedor+']').attr("selected",true);
+					$('#verPrecio').val(articulo.precio);
+					$('#form-verArticulo :input').each(function(){
+					});
+					$('#modal-verArticulo').modal('show');
+				}
+			});
+			
+		});
+		$('#editarArticulo').click(function(){
+			$('#verNombre').toggleClass('input-readonly');
+			$('#verDescripcion').toggleClass('input-readonly');
+			$('#verAlto').toggleClass('input-readonly');
+			$('#verLargo').toggleClass('input-readonly');
+			$('#verAncho').toggleClass('input-readonly');
+			$('#verProveedor').toggleClass('input-readonly');
+			$('#verPrecio').toggleClass('input-readonly');
+			$('#btn-guardarCambios').prop('disabled',!$('#btn-guardarCambios').prop('disabled'));
+			$('.form-group').removeClass('has-error has-success');
+		});
+		$('#modal-verArticulo').on('hide.bs.modal',function(e){
+			$('#verNombre').addClass('input-readonly');
+			$('#verDescripcion').addClass('input-readonly');
+			$('#verAlto').addClass('input-readonly');
+			$('#verLargo').addClass('input-readonly');
+			$('#verAncho').addClass('input-readonly');
+			$('#verProveedor').addClass('input-readonly');
+			$('#verPrecio').addClass('input-readonly');
+			$('#btn-guardarCambios').prop("disabled",true);
 		});
 		$('#regresarCategoria').click(function(){
 			if(id_categoria == 1){
@@ -387,7 +573,8 @@
 					var articulos = datos.articulos;
 					var vandera = false;
 					if(datos.resp == false){
-						$('#list-categorias').html(datos.mensaje);
+						$('#mensaje').html('<div class="alert alert-info" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Error!</strong>&nbsp;'+datos.mensaje+'</div>');
+						$('#list-categorias').html('');
 					} else{
 						if(categorias.length > 0){
 							var cadena = "";
@@ -397,6 +584,7 @@
 							}
 							$('#list-categorias').html(cadena);
 							vandera = true;
+							categoriasOarticulos = 0;
 						}
 						if(articulos.length > 0){
 							if(vandera == false){
@@ -405,18 +593,27 @@
 							var cadena = "";
 							id_categoria_anterior = articulos[0].anterior;
 							for(var i = 0; i < articulos.length; i++){
-								cadena += '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4"><div class="categoria"><div class="sticker" aria-expanded="false"><i class="fa fa-tag fa-fw"></i> '+articulos[i].nombre+'</div></div></div>';
+								cadena += '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4"><div class="articulo" data-id="'+articulos[i].id+'"><div class="sticker" aria-expanded="false"><i class="fa fa-tag fa-fw"></i> '+articulos[i].nombre+'</div></div></div>';
 							}
 							$('#list-categorias').append(cadena);
 							vandera = true;
+							categoriasOarticulos = 1;
 						}
 						if(vandera == false){
 							$('#mensaje').html('<div class="alert alert-info" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Error!</strong>&nbsp;Actualmente no cuenta con categorías ni articulos</div>');
 							$('#list-categorias').html('');
+							categoriasOarticulos = 2;
 						}
 					}
 				}
 			});
 		}
+		$('.modal').on('hide.bs.modal',function(e){
+			nuevaCategoria.resetForm();
+			articulo.resetForm();
+			renombrar.resetForm();
+			editarArticulo.resetForm();
+			$('.form-group').removeClass('has-error has-success');
+		});
 	});
 </script>	
